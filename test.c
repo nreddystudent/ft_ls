@@ -3,27 +3,27 @@
 #include <stdio.h>
 #include "./libft/libft.h"
 
-char *ft_check_args(int argc, char **argv)
+int		ft_check_args(int argc, char **argv)
 {
 	int		i;
 
-	i = 0;
-	while (argv[i] == ' ' || argv[i] == '-')
+	i = 1;
+	while (argv[i][0] == '-')
 		i++;
-	while (argv[i] == ' ' || ft_isalpha(argv[i]) == 0)
-
-	return(
+	return(i);
 }
 void	ft_ls(int argc, char **argv)
 {
-   DIR *currentfile = opendir(argv[1]);
-   struct dirent *ptrf, f1;
-   ptrf = &f1;
+	int 	i;
+	DIR		*currentfile; 
+	struct 	dirent *ptrf, f1;
 
+	ptrf = &f1;
+	i = ft_check_args(argc, argv);
+	currentfile = opendir(argv[i]);
 	while((ptrf = readdir(currentfile)) != NULL)
 		printf("%s\t", ptrf->d_name);
 	printf("\n");
-  	
 }
 
 int		main(int argc, char **argv)
