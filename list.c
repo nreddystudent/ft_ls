@@ -1,12 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nreddy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/03 14:38:20 by nreddy            #+#    #+#             */
+/*   Updated: 2019/07/03 14:38:21 by nreddy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./libft/libft.h"
+#include "test.h"
 
-t_list	*ft_listcreate(char *s, t_list *Mylist)
+void	ft_listcreate(t_list **mylist, t_list **new, struct dirent *ptrf)
 {
-	if (Mylist == NULL)
+	if (*mylist == NULL)
+		*mylist = ft_lstnew(ptrf->d_name, ft_strlen(ptrf->d_name));
+	else
 	{
-		Mylist = ft_lstnew(s, ft_strlen(s));
-		ft_putstr(Mylist->content);
+		*new = ft_lstnew(ptrf->d_name, ft_strlen(ptrf->d_name));
+		ft_lstadd(mylist, *new);
 	}
-	return (Mylist);
+}
 
+void	ft_printlist(t_list *mylist)
+{
+	while (mylist != NULL)
+	{
+		ft_putstr(mylist->content);
+		ft_putchar('\t');
+		mylist = mylist->next;
+	}
+}
+
+int		ft_is_dir(const char *pname)
+{
+	struct stat s;
+
+	stat(pname, &s);
+	return (S_ISDIR(s.st_mode));
 }

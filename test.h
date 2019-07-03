@@ -1,5 +1,3 @@
-struct stuff
-{
-    int i;
-    char c;
-};
+#include <dirent.h>
+#include "./libft/libft.h"
+#include <sys/stat.h>

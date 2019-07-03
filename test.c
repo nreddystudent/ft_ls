@@ -1,9 +1,19 @@
-#include <dirent.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nreddy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/03 14:38:30 by nreddy            #+#    #+#             */
+/*   Updated: 2019/07/03 14:38:32 by nreddy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "test.h"
 #include <stdio.h>
-#include "./libft/libft.h"
 #include "./list.c"
-int		ft_check_args(int argc, char **argv, unsigned char *c, int *ptri)
+int		ft_check_args(char **argv, int *ptri, unsigned char *c)
 {
 	int		x;
 
@@ -13,13 +23,13 @@ int		ft_check_args(int argc, char **argv, unsigned char *c, int *ptri)
 		while (argv[*ptri][x] != '\0')
 		{
 			if (argv[*ptri][x] == 'a')
-				ft_putstr("all");
+				*c=1;
 			if (argv[*ptri][x] == 'l')
-				ft_putstr("long");
+				*c+=2;
 			if (argv[*ptri][x] == 'r')
-				ft_putstr("reverse");
+				*c+=4;
 			if (argv[*ptri][x] == 'R')
-				ft_putstr("recursion");
+				*c+=8;
 			x++;
 		}
 			
@@ -27,7 +37,7 @@ int		ft_check_args(int argc, char **argv, unsigned char *c, int *ptri)
 	}
 	return (*ptri);
 }
-void	ft_MF(int *ptri,char **argv, int argc, struct dirent *ptrf, t_list *Mylist)
+void	ft_MF(int *ptri, char **argv, int argc, struct dirent *ptrf, t_list *mylist)
 {
 	DIR		*currentfile;
 	t_list	*new;
@@ -38,22 +48,8 @@ void	ft_MF(int *ptri,char **argv, int argc, struct dirent *ptrf, t_list *Mylist)
 		ft_putstr(argv[*ptri]);
 		ft_putstr(":\n");
 		while((ptrf = readdir(currentfile)) != NULL)
-		{
-			if (Mylist == NULL)
-				Mylist = ft_lstnew(ptrf->d_name, ft_strlen(ptrf->d_name));
-			else
-			{
-				new = ft_lstnew(ptrf->d_name, ft_strlen(ptrf->d_name));
-				ft_lstadd(&Mylist, new);
-			}	
-
-		}
-		while (Mylist != NULL)
-		{
-			ft_putstr(Mylist-> content);
-			ft_putchar('\t');
-			Mylist = Mylist->next;
-		}
+			ft_listcreate(&mylist, &new, ptrf);
+		ft_printlist(mylist);
 		*ptri = *ptri + 1;
 		if(*ptri != argc) 
 			ft_putstr("\n\n");
@@ -63,41 +59,35 @@ void	ft_ls(int argc, char **argv)
 {
 	int 	i;
 	DIR		*currentfile; 
-	struct 	dirent *ptrf, f1;
+	struct 	dirent f1, *ptrf;
 	unsigned char c;
-	t_list	*Mylist;
-	t_list *new;
+	t_list *mylist;
 	
-	Mylist = NULL;
-	i = 1;
 	ptrf = &f1;
+	c = 0;
+	mylist = NULL;
+	i = 1;
 	while (i != argc)
 	{
-		i = ft_check_args(argc, argv, &c, &i);
+		i = ft_check_args(argv, &i, &c);
 		if ((argc-1) - i > 0)
 		{
-			ft_MF(&i, argv, argc, ptrf, Mylist);
+			ft_MF(&i, argv, argc, &f1, mylist);
 			break;
 		}
 		currentfile = opendir(argv[i]);
 		while((ptrf = readdir(currentfile)) != NULL)
 		{
-			if (Mylist == NULL)
-				Mylist = ft_lstnew(ptrf->d_name, ft_strlen(ptrf->d_name));
-			else
+			if(ft_is_dir(ptrf->d_name) && (c & 8))
 			{
-				new = ft_lstnew(ptrf->d_name, ft_strlen(ptrf->d_name));
-				ft_lstadd(&Mylist, new);
+				ft_putstr("R");
 			}
+			printf("%s\t", ptrf->d_name);
+			
+			
 		}
 		i++;
 	}
-		while (Mylist != NULL)
-		{
-			ft_putstr(Mylist-> content);
-			ft_putchar('\t');
-			Mylist = Mylist->next;
-		}
 		ft_putchar('\n');
 }
 
