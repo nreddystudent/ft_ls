@@ -30,7 +30,8 @@ int		ft_check_args(int argc, char **argv, unsigned char *c, int *ptri)
 void	ft_MF(int *ptri,char **argv, int argc, struct dirent *ptrf)
 {
 	DIR		*currentfile;
-	t_list *Mylist;
+	static t_list *Mylist;
+	t_list	*new;
 
 	while (*ptri != argc)
 	{
@@ -39,8 +40,20 @@ void	ft_MF(int *ptri,char **argv, int argc, struct dirent *ptrf)
 		ft_putstr(":\n");
 		while((ptrf = readdir(currentfile)) != NULL)
 		{
-			ft_listcreate(ptrf->d_name, Mylist);
+			if (Mylist == NULL)
+				Mylist = ft_lstnew(ptrf->d_name, ft_strlen(ptrf->d_name));
+			else
+			{
+				new = ft_lstnew(ptrf->d_name, ft_strlen(ptrf->d_name));
+				ft_lstadd(&Mylist, new);
+			}	
+
+		}
+		while (Mylist != NULL)
+		{
+			ft_putstr(Mylist-> content);
 			ft_putchar('\t');
+			Mylist = Mylist->next;
 		}
 		*ptri = *ptri + 1;
 		(*ptri != argc) ? ft_putstr("\n\n") : ft_putchar('\n');
