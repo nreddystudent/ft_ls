@@ -27,10 +27,9 @@ int		ft_check_args(int argc, char **argv, unsigned char *c, int *ptri)
 	}
 	return (*ptri);
 }
-void	ft_MF(int *ptri,char **argv, int argc, struct dirent *ptrf)
+void	ft_MF(int *ptri,char **argv, int argc, struct dirent *ptrf, t_list *Mylist)
 {
 	DIR		*currentfile;
-	static t_list *Mylist;
 	t_list	*new;
 
 	while (*ptri != argc)
@@ -56,7 +55,8 @@ void	ft_MF(int *ptri,char **argv, int argc, struct dirent *ptrf)
 			Mylist = Mylist->next;
 		}
 		*ptri = *ptri + 1;
-		(*ptri != argc) ? ft_putstr("\n\n") : ft_putchar('\n');
+		if(*ptri != argc) 
+			ft_putstr("\n\n");
 	}
 }
 void	ft_ls(int argc, char **argv)
@@ -65,7 +65,10 @@ void	ft_ls(int argc, char **argv)
 	DIR		*currentfile; 
 	struct 	dirent *ptrf, f1;
 	unsigned char c;
-
+	t_list	*Mylist;
+	t_list *new;
+	
+	Mylist = NULL;
 	i = 1;
 	ptrf = &f1;
 	while (i != argc)
@@ -73,18 +76,29 @@ void	ft_ls(int argc, char **argv)
 		i = ft_check_args(argc, argv, &c, &i);
 		if ((argc-1) - i > 0)
 		{
-			ft_MF(&i, argv, argc, ptrf);
+			ft_MF(&i, argv, argc, ptrf, Mylist);
 			break;
 		}
 		currentfile = opendir(argv[i]);
 		while((ptrf = readdir(currentfile)) != NULL)
 		{
-			ft_putstr(ptrf->d_name);
-			ft_putchar('\t');
+			if (Mylist == NULL)
+				Mylist = ft_lstnew(ptrf->d_name, ft_strlen(ptrf->d_name));
+			else
+			{
+				new = ft_lstnew(ptrf->d_name, ft_strlen(ptrf->d_name));
+				ft_lstadd(&Mylist, new);
+			}
 		}
-		ft_putchar('\n');
 		i++;
 	}
+		while (Mylist != NULL)
+		{
+			ft_putstr(Mylist-> content);
+			ft_putchar('\t');
+			Mylist = Mylist->next;
+		}
+		ft_putchar('\n');
 }
 
 int		main(int argc, char **argv)
