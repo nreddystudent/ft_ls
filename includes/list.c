@@ -41,3 +41,19 @@ int		ft_is_dir(const char *pname)
 	stat(pname, &s);
 	return (S_ISDIR(s.st_mode));
 }
+
+void	ft_ls(int argc, char **argv, unsigned char c, int i)
+{
+	DIR				*file;
+	struct dirent	*ptrs;
+
+	ptrs = NULL;
+	(void)c;
+	(void)argc;
+	file = opendir(argv[i]);
+	while ((ptrs = readdir(file)))
+	{
+		ft_putstr(ptrs->d_name);
+		ft_putstr("   ");
+	}
+}

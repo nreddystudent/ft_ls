@@ -39,12 +39,12 @@ int		ft_check_args(char **argv, int *ptri, unsigned char *c)
 
 int		main(int argc, char **argv)
 {
-	int i;
-	unsigned char c;
-	(void)argc;
+	int				i;
+	unsigned char	c;
 
-	i = 0;
+	i = 1;
 	c = 0;
 	i = ft_check_args(argv, &i, &c);
+	ft_ls(argc, argv, c, i);
 	return (0);
 }
