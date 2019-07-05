@@ -13,22 +13,23 @@
 #include "../libft/libft.h"
 #include "../ft_ls.h"
 
-void	ft_listcreate(t_list **mylist, t_list **new, struct dirent *ptrf)
+void	ft_listcreate(mything **mylist, mything **new, struct dirent *ptrf)
 {
 	if (*mylist == NULL)
-		*mylist = ft_lstnew(ptrf->d_name, ft_strlen(ptrf->d_name));
+		*mylist = ft_listnew(ptrf->d_name, ft_strlen(ptrf->d_name));
 	else
 	{
-		*new = ft_lstnew(ptrf->d_name, ft_strlen(ptrf->d_name));
-		ft_lstadd(mylist, *new);
+		*new = ft_listnew(ptrf->d_name, ft_strlen(ptrf->d_name));
+		(*new)->next = *mylist;
+		mylist = new;
 	}
 }
 
-void	ft_printlist(t_list *mylist)
+void	ft_printlist(mything *mylist)
 {
 	while (mylist != NULL)
 	{
-		ft_putstr(mylist->content);
+		ft_putstr(mylist->d_name);
 		ft_putchar('\t');
 		mylist = mylist->next;
 	}
@@ -42,18 +43,24 @@ int		ft_is_dir(const char *pname)
 	return (S_ISDIR(s.st_mode));
 }
 
-void	ft_ls(int argc, char **argv, unsigned char c, int i)
+void	ft_read(char *path, unsigned char c)
 {
 	DIR				*file;
-	struct dirent	*ptrs;
+	struct dirent	*ptr;
+	mything			*ptrmystuff;
+	mything			*new;
 
-	ptrs = NULL;
+	(void)c;
+	new = NULL;
+	file = opendir(path);
+	while ((ptr = readdir(file)))
+		ft_listcreate(&ptrmystuff, &new, ptr);
+	ft_printlist(ptrmystuff);
+}
+
+void	ft_ls(int argc, char **argv, unsigned char c, int i)
+{
 	(void)c;
 	(void)argc;
-	file = opendir(argv[i]);
-	while ((ptrs = readdir(file)))
-	{
-		ft_putstr(ptrs->d_name);
-		ft_putstr("   ");
-	}
+	ft_read(argv[i], c);
 }

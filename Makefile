@@ -1,4 +1,4 @@
-SRC=includes/list.c
+SRC=includes/list.c includes/func.c
 NAME=ft_ls
 RED=\033[0;31m
 LBLUE=\033[1;34m
