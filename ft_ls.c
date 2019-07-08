@@ -51,7 +51,6 @@ int		main(int argc, char **argv)
 	i = ft_check_args(argv, &i, &c, argc);
 	if (argc - i == 1)
 	{
-		i = 0;
 		ft_read(".", c);
 		return (0);
 	}
