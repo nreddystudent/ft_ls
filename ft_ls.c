@@ -44,7 +44,18 @@ int		main(int argc, char **argv)
 
 	i = 1;
 	c = 0;
+	if (argc == 1)
+	{
+		i = 0;
+		ft_putstr("a dot");
+		ft_ls(argc, argv, c, i);
+	}
 	i = ft_check_args(argv, &i, &c);
+	if (argc - 1 - i > 0)
+	{
+		ft_putstr("multiple files");
+		return (0);
+	}
 	ft_ls(argc, argv, c, i);
 	return (0);
 }

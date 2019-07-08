@@ -13,15 +13,18 @@
 #include "../libft/libft.h"
 #include "../ft_ls.h"
 
-void	ft_listcreate(mything **mylist, mything **new, struct dirent *ptrf)
+mything	*ft_listcreate(mything *mylist, mything *new, struct dirent *ptrf)
 {
-	if (*mylist == NULL)
-		*mylist = ft_listnew(ptrf->d_name, ft_strlen(ptrf->d_name));
+	if (mylist == NULL)
+	{
+		mylist = ft_listnew(ptrf->d_name);
+		return(mylist);
+	}
 	else
 	{
-		*new = ft_listnew(ptrf->d_name, ft_strlen(ptrf->d_name));
-		(*new)->next = *mylist;
-		mylist = new;
+		new = ft_listnew(ptrf->d_name);
+		ft_listadd(&mylist, new);
+		return(mylist);
 	}
 }
 
@@ -30,9 +33,10 @@ void	ft_printlist(mything *mylist)
 	while (mylist != NULL)
 	{
 		ft_putstr(mylist->d_name);
-		ft_putchar('\t');
+		ft_putstr("   ");
 		mylist = mylist->next;
 	}
+	ft_putchar('\n');
 }
 
 int		ft_is_dir(const char *pname)
@@ -51,10 +55,12 @@ void	ft_read(char *path, unsigned char c)
 	mything			*new;
 
 	(void)c;
+	ptrmystuff = NULL;
 	new = NULL;
 	file = opendir(path);
 	while ((ptr = readdir(file)))
-		ft_listcreate(&ptrmystuff, &new, ptr);
+		ptrmystuff = ft_listcreate(ptrmystuff, new, ptr);
+	ft_sortlist(&ptrmystuff);
 	ft_printlist(ptrmystuff);
 }
 

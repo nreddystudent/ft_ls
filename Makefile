@@ -9,7 +9,7 @@ all:$(NAME)
 $(NAME):
 	@make some -C libft/
 	@gcc -Wall -Werror -Wextra -c $(SRC)
-	@ar rc libftcomb.a libft/*.o list.o
+	@ar rc libftcomb.a libft/*.o list.o func.o
 	@ranlib libftcomb.a
 	@gcc -Wall -Werror -Wextra -o ft_ls ft_ls.c libftcomb.a
 	@echo "$(LGREEN)Done compiling ft_ls"
