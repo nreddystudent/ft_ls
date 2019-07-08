@@ -13,11 +13,11 @@
 #include "ft_ls.h"
 #include "libft/libft.h"
 
-int		ft_check_args(char **argv, int *ptri, unsigned char *c)
+int		ft_check_args(char **argv, int *ptri, unsigned char *c, int argc)
 {
 	int		x;
 
-	while (argv[*ptri][0] == '-')
+	while ((argv[*ptri][0] == '-') && (*ptri < argc))
 	{
 		x = 0;
 		while (argv[*ptri][x] != '\0')
@@ -32,6 +32,8 @@ int		ft_check_args(char **argv, int *ptri, unsigned char *c)
 				*c += 8;
 			x++;
 		}
+		if (argv[*ptri + 1] == NULL)
+			break;
 		*ptri = *ptri + 1;
 	}
 	return (*ptri);
@@ -42,15 +44,17 @@ int		main(int argc, char **argv)
 	int				i;
 	unsigned char	c;
 
-	i = 1;
+	i = 0;
+	if (argv[1] != NULL)
+		i = 1;
 	c = 0;
-	if (argc == 1)
+	i = ft_check_args(argv, &i, &c, argc);
+	if (argc - i == 1)
 	{
 		i = 0;
-		ft_putstr("a dot");
-		ft_ls(argc, argv, c, i);
+		ft_read(".", c);
+		return (0);
 	}
-	i = ft_check_args(argv, &i, &c);
 	if (argc - 1 - i > 0)
 	{
 		ft_putstr("multiple files");
