@@ -1,4 +1,4 @@
-SRC=includes/list.c includes/func.c
+SRC=includes/list.c includes/func.c includes/func1.c
 NAME=ft_ls
 RED=\033[0;31m
 LBLUE=\033[1;34m
@@ -9,7 +9,7 @@ all:$(NAME)
 $(NAME):
 	@make some -C libft/
 	@gcc -Wall -Werror -Wextra -c $(SRC)
-	@ar rc libftcomb.a libft/*.o list.o func.o
+	@ar rc libftcomb.a libft/*.o list.o func.o func1.o
 	@ranlib libftcomb.a
 	@gcc -Wall -Werror -Wextra -o ft_ls ft_ls.c libftcomb.a
 	@echo "$(LGREEN)Done compiling ft_ls"

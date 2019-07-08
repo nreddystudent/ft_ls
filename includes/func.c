@@ -32,7 +32,7 @@ void	ft_listadd(mything **list, mything *new)
 	*list = new;
 }
 
-void	ft_sortlist(mything **headref)
+void	ft_sortlist(mything **headref, unsigned char c)
 {
 	mything	*head;
 	mything *fh;
@@ -42,9 +42,9 @@ void	ft_sortlist(mything **headref)
 	if ((head == NULL) || (head->next == NULL))
 		return ;
 	frontbacksplit(head, &fh, &bh);
-	ft_sortlist(&fh);
-	ft_sortlist(&bh);
-	*headref = ft_sortedmerge(fh, bh);
+	ft_sortlist(&fh, c);
+	ft_sortlist(&bh, c);
+	*headref = ft_sortedmerge(fh, bh, c);
 }
 
 void	frontbacksplit(mything *head, mything **fh, mything **bh)
@@ -68,7 +68,7 @@ void	frontbacksplit(mything *head, mything **fh, mything **bh)
 	slow->next = NULL;
 }
 
-mything	*ft_sortedmerge(mything *fh, mything *bh)
+mything	*ft_sortedmerge(mything *fh, mything *bh, unsigned char c)
 {
 	mything *result;
 
@@ -77,15 +77,20 @@ mything	*ft_sortedmerge(mything *fh, mything *bh)
 		return (bh);
 	else if (bh == NULL)
 		return (fh);
-	if ((ft_strcmp(fh->d_name, bh->d_name)) < 0)
+	if (!(c & 4) && (ft_strcmp(fh->d_name, bh->d_name)) < 0)
 	{
 		result = fh;
-		result->next = ft_sortedmerge(fh->next, bh);
+		result->next = ft_sortedmerge(fh->next, bh, c);
+	}
+	else if ((c & 4) && (ft_strcmp(fh->d_name, bh->d_name)) > 0)
+	{
+		result = fh;
+		result->next = ft_sortedmerge(fh->next, bh, c);
 	}
 	else
 	{
 		result = bh;
-		result->next = ft_sortedmerge(fh, bh->next);
+		result->next = ft_sortedmerge(fh, bh->next, c);
 	}
 	return (result);
 }

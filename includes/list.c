@@ -63,7 +63,10 @@ void	ft_read(char *path, unsigned char c)
 			continue ;
 		ptrmystuff = ft_listcreate(ptrmystuff, new, ptr);
 	}
-	ft_sortlist(&ptrmystuff);
+	closedir(file);
+	if (c & 8)
+		ft_readr(path, c);
+	ft_sortlist(&ptrmystuff, c);
 	ft_printlist(ptrmystuff);
 }
 
