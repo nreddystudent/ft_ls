@@ -73,9 +73,11 @@ mything	*ft_sortedmerge(mything *fh, mything *bh)
 	mything *result;
 
 	result = NULL;
-	if (fh == NULL || bh == NULL)
-		return (NULL);
-	if (ft_strcmp(fh->d_name, bh->d_name) < 0)
+	if (fh == NULL)
+		return (bh);
+	else if (bh == NULL)
+		return (fh);
+	if ((ft_strcmp(fh->d_name, bh->d_name)) < 0)
 	{
 		result = fh;
 		result->next = ft_sortedmerge(fh->next, bh);
@@ -85,5 +87,5 @@ mything	*ft_sortedmerge(mything *fh, mything *bh)
 		result = bh;
 		result->next = ft_sortedmerge(fh, bh->next);
 	}
-	return(result);
+	return (result);
 }

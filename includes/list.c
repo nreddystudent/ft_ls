@@ -18,13 +18,13 @@ mything	*ft_listcreate(mything *mylist, mything *new, struct dirent *ptrf)
 	if (mylist == NULL)
 	{
 		mylist = ft_listnew(ptrf->d_name);
-		return(mylist);
+		return (mylist);
 	}
 	else
 	{
 		new = ft_listnew(ptrf->d_name);
 		ft_listadd(&mylist, new);
-		return(mylist);
+		return (mylist);
 	}
 }
 
@@ -54,12 +54,16 @@ void	ft_read(char *path, unsigned char c)
 	mything			*ptrmystuff;
 	mything			*new;
 
-	(void)c;
 	ptrmystuff = NULL;
 	new = NULL;
 	file = opendir(path);
 	while ((ptr = readdir(file)))
+	{
+		if (c & 1 &&
+		(ft_strcmp(".", ptr->d_name) == 0 || ft_strcmp("..", ptr->d_name) == 0))
+			continue ;
 		ptrmystuff = ft_listcreate(ptrmystuff, new, ptr);
+	}
 	ft_sortlist(&ptrmystuff);
 	ft_printlist(ptrmystuff);
 }
