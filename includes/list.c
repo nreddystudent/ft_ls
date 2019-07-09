@@ -69,6 +69,7 @@ void		ft_read(char *path, unsigned char c)
 	if (c & 8)
 		ft_readr(path, c, ptrmystuff);
 	ft_printlist(ptrmystuff);
+	ft_listdel(ptrmystuff);
 }
 
 void		ft_ls(int argc, char **argv, unsigned char c, int i)

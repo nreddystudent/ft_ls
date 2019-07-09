@@ -45,5 +45,7 @@ t_mything				*ft_sortedmerge(t_mything *fh,
 						t_mything *bh, unsigned char c);
 void					ft_readr(char *path,
 						unsigned char c, t_mything *mylist);
+void					ft_listdel(t_mything *mylist);
+
 
 #endif

@@ -16,6 +16,9 @@
 void	ft_readr(char *path, unsigned char c,
 		t_mything *mylist)
 {
+	char *str1;
+	char *str2;
+
 	while (mylist != NULL)
 	{
 		if ((ft_strcmp(".", mylist->d_name) == 0)
@@ -24,13 +27,28 @@ void	ft_readr(char *path, unsigned char c,
 			mylist = mylist->next;
 			continue ;
 		}
-		if ((ft_is_dir((ft_strjoin(path,
-		ft_strjoin("/", mylist->d_name)))) == 1))
+		str1 = ft_strjoin("/", mylist->d_name);
+		str2 = ft_strjoin(path, str1);
+		free(str1);
+		if ((ft_is_dir(str2) == 1))
 		{
 			ft_putstr(mylist->d_name);
 			ft_putstr(":\n");
-			ft_read(ft_strjoin(path, ft_strjoin("/", mylist->d_name)), c);
+			ft_read(str2, c);
 		}
+		free(str2);
 		mylist = mylist->next;
+	}
+}
+
+void	ft_listdel(t_mything *mylist)
+{
+	t_mything *head;
+
+	while (mylist != NULL)
+	{
+		head = mylist;
+		mylist = mylist->next;
+		free(head);
 	}
 }
