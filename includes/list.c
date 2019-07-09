@@ -64,9 +64,9 @@ void	ft_read(char *path, unsigned char c)
 		ptrmystuff = ft_listcreate(ptrmystuff, new, ptr);
 	}
 	closedir(file);
-	if (c & 8)
-		ft_readr(path, c);
 	ft_sortlist(&ptrmystuff, c);
+	if (c & 8)
+		ft_readr(path, c, ptrmystuff);
 	ft_printlist(ptrmystuff);
 }
 

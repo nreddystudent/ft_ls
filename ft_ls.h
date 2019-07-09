@@ -25,4 +25,4 @@ void	ft_listadd(mything **list, mything *new);
 void	ft_sortlist(mything **headref, unsigned char c);
 void	frontbacksplit(mything *head, mything **fh, mything **bh);
 mything	*ft_sortedmerge(mything *fh, mything *bh, unsigned char c);
-void	ft_readr(char *path, unsigned char c);
+void	ft_readr(char *path, unsigned char c, mything *mylist);

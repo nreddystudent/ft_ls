@@ -17,7 +17,6 @@ int		ft_check_args(char **argv, int *ptri, unsigned char *c, int argc)
 {
 	int		x;
 
-	ft_putnbr(*ptri);
 	while ((argv[*ptri][0] == '-') && (*ptri < argc))
 	{
 		x = 0;
@@ -33,8 +32,11 @@ int		ft_check_args(char **argv, int *ptri, unsigned char *c, int argc)
 				*c += 8;
 			x++;
 		}
-		//if (argv[*ptri + 1] == NULL)
-		//	break ;
+		if (argv[*ptri + 1] == NULL)
+		{
+			*c += 16;
+			break ;
+		}
 		*ptri = *ptri + 1;
 	}
 	return (*ptri);
@@ -50,8 +52,7 @@ int		main(int argc, char **argv)
 		i = 1;
 	c = 0;
 	i = ft_check_args(argv, &i, &c, argc);
-	ft_putnbr(i);
-	if (i == argc - 1)
+	if ((argc == 1) || (c & 16))
 	{
 		ft_read(".", c);
 		return (0);
@@ -61,7 +62,6 @@ int		main(int argc, char **argv)
 		ft_putstr("multiple files");
 		return (0);
 	}
-	ft_putstr("hello");
 	ft_ls(argc, argv, c, i);
 	return (0);
 }
