@@ -13,12 +13,12 @@
 #include "../ft_ls.h"
 #include "../libft/libft.h"
 
-mything	*ft_listnew(char *content)
+t_mything	*ft_listnew(char *content)
 {
-	mything	*listn;
+	t_mything	*listn;
 
 	listn = NULL;
-	if (!(listn = (mything *)malloc(sizeof(mything))))
+	if (!(listn = (t_mything *)malloc(sizeof(t_mything))))
 		return (NULL);
 	if (!(listn->d_name = ft_strdup(content)))
 		return (NULL);
@@ -26,17 +26,17 @@ mything	*ft_listnew(char *content)
 	return (listn);
 }
 
-void	ft_listadd(mything **list, mything *new)
+void		ft_listadd(t_mything **list, t_mything *new)
 {
 	new->next = *list;
 	*list = new;
 }
 
-void	ft_sortlist(mything **headref, unsigned char c)
+void		ft_sortlist(t_mything **headref, unsigned char c)
 {
-	mything	*head;
-	mything *fh;
-	mything *bh;
+	t_mything	*head;
+	t_mything	*fh;
+	t_mything	*bh;
 
 	head = *headref;
 	if ((head == NULL) || (head->next == NULL))
@@ -47,10 +47,10 @@ void	ft_sortlist(mything **headref, unsigned char c)
 	*headref = ft_sortedmerge(fh, bh, c);
 }
 
-void	frontbacksplit(mything *head, mything **fh, mything **bh)
+void		frontbacksplit(t_mything *head, t_mything **fh, t_mything **bh)
 {
-	mything *fast;
-	mything *slow;
+	t_mything *fast;
+	t_mything *slow;
 
 	slow = head;
 	fast = head->next;
@@ -68,9 +68,9 @@ void	frontbacksplit(mything *head, mything **fh, mything **bh)
 	slow->next = NULL;
 }
 
-mything	*ft_sortedmerge(mything *fh, mything *bh, unsigned char c)
+t_mything	*ft_sortedmerge(t_mything *fh, t_mything *bh, unsigned char c)
 {
-	mything *result;
+	t_mything *result;
 
 	result = NULL;
 	if (fh == NULL)

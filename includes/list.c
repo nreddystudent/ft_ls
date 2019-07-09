@@ -13,7 +13,8 @@
 #include "../libft/libft.h"
 #include "../ft_ls.h"
 
-mything	*ft_listcreate(mything *mylist, mything *new, struct dirent *ptrf)
+t_mything	*ft_listcreate(t_mything *mylist,
+			t_mything *new, struct dirent *ptrf)
 {
 	if (mylist == NULL)
 	{
@@ -28,7 +29,7 @@ mything	*ft_listcreate(mything *mylist, mything *new, struct dirent *ptrf)
 	}
 }
 
-void	ft_printlist(mything *mylist)
+void		ft_printlist(t_mything *mylist)
 {
 	while (mylist != NULL)
 	{
@@ -39,7 +40,7 @@ void	ft_printlist(mything *mylist)
 	ft_putchar('\n');
 }
 
-int		ft_is_dir(const char *pname)
+int			ft_is_dir(const char *pname)
 {
 	struct stat s;
 
@@ -47,12 +48,12 @@ int		ft_is_dir(const char *pname)
 	return (S_ISDIR(s.st_mode));
 }
 
-void	ft_read(char *path, unsigned char c)
+void		ft_read(char *path, unsigned char c)
 {
 	DIR				*file;
 	struct dirent	*ptr;
-	mything			*ptrmystuff;
-	mything			*new;
+	t_mything		*ptrmystuff;
+	t_mything		*new;
 
 	ptrmystuff = NULL;
 	new = NULL;
@@ -70,7 +71,7 @@ void	ft_read(char *path, unsigned char c)
 	ft_printlist(ptrmystuff);
 }
 
-void	ft_ls(int argc, char **argv, unsigned char c, int i)
+void		ft_ls(int argc, char **argv, unsigned char c, int i)
 {
 	(void)c;
 	(void)argc;

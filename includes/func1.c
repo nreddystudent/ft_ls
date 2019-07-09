@@ -13,16 +13,19 @@
 #include "../ft_ls.h"
 #include "../libft/libft.h"
 
-void	ft_readr(char *path, unsigned char c, mything *mylist)
+void	ft_readr(char *path, unsigned char c,
+		t_mything *mylist)
 {
-	while(mylist != NULL)
+	while (mylist != NULL)
 	{
-		if ((ft_strcmp(".", mylist->d_name) == 0) || (ft_strcmp("..", mylist->d_name) == 0))
+		if ((ft_strcmp(".", mylist->d_name) == 0)
+		|| (ft_strcmp("..", mylist->d_name) == 0))
 		{
 			mylist = mylist->next;
 			continue ;
 		}
-		if ((ft_is_dir((ft_strjoin(path, ft_strjoin("/", mylist->d_name)))) == 1))
+		if ((ft_is_dir((ft_strjoin(path,
+		ft_strjoin("/", mylist->d_name)))) == 1))
 		{
 			ft_putstr(mylist->d_name);
 			ft_putstr(":\n");
