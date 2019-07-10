@@ -58,6 +58,11 @@ void		ft_read(char *path, unsigned char c)
 	ptrmystuff = NULL;
 	new = NULL;
 	file = opendir(path);
+	if (errno == 13)
+	{
+		ft_putstr("permission denied");
+		return ;
+	}
 	while ((ptr = readdir(file)))
 	{
 		if (!(c & 1) && (ptr->d_name[0] == '.'))

@@ -20,15 +20,15 @@ int		ft_check_args(char **argv, int *ptri, unsigned char *c, int argc)
 	while ((argv[*ptri][0] == '-') && (*ptri < argc))
 	{
 		x = 0;
-		while (argv[*ptri][x] != '\0')
+		while (argv[*ptri][x])
 		{
-			if (argv[*ptri][x] == 'a')
+			if (argv[*ptri][x] == 'a' && !(*c & 1))
 				*c += 1;
-			if (argv[*ptri][x] == 'l')
+			if (argv[*ptri][x] == 'l' && !(*c & 2))
 				*c += 2;
-			if (argv[*ptri][x] == 'r')
+			if (argv[*ptri][x] == 'r' && !(*c & 4))
 				*c += 4;
-			if (argv[*ptri][x] == 'R')
+			if (argv[*ptri][x] == 'R' && !(*c & 8))
 				*c += 8;
 			x++;
 		}

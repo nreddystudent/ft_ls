@@ -22,10 +22,14 @@
 # include <grp.h>
 # include <sys/xattr.h>
 # include <string.h>
+# include <errno.h>
 
 typedef	struct			s_mystuff
 {
 	char				*d_name;
+	char				*user;
+	char				*group;
+	char				permission[10];
 	struct s_mystuff	*next;
 }						t_mything;
 
@@ -46,6 +50,8 @@ t_mything				*ft_sortedmerge(t_mything *fh,
 void					ft_readr(char *path,
 						unsigned char c, t_mything *mylist);
 void					ft_listdel(t_mything *mylist);
-
+void					ft_add_elements(t_mything *mylist);
+void					ft_get_names(t_mything *mylist, struct stat statistics);
+void					ft_get_fileperm(t_mything *mylist, struct stat statistics);
 
 #endif

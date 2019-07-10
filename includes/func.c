@@ -23,6 +23,7 @@ t_mything	*ft_listnew(char *content)
 	if (!(listn->d_name = ft_strdup(content)))
 		return (NULL);
 	listn->next = NULL;
+	ft_add_elements(listn);
 	return (listn);
 }
 
