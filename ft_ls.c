@@ -22,14 +22,14 @@ int		ft_check_args(char **argv, int *ptri, unsigned char *c, int argc)
 		x = 0;
 		while (argv[*ptri][x])
 		{
-			if (argv[*ptri][x] == 'a' && !(*c & 1))
-				*c += 1;
-			if (argv[*ptri][x] == 'l' && !(*c & 2))
-				*c += 2;
-			if (argv[*ptri][x] == 'r' && !(*c & 4))
-				*c += 4;
-			if (argv[*ptri][x] == 'R' && !(*c & 8))
-				*c += 8;
+			if (argv[*ptri][x] == 'a' && !(*c & FLAG_A))
+				*c += FLAG_A;
+			if (argv[*ptri][x] == 'l' && !(*c & FLAG_L))
+				*c += FLAG_L;
+			if (argv[*ptri][x] == 'r' && !(*c & FLAG_REV))
+				*c += FLAG_REV;
+			if (argv[*ptri][x] == 'R' && !(*c & FLAG_R))
+				*c += FLAG_R;
 			x++;
 		}
 		if (argv[*ptri + 1] == NULL)

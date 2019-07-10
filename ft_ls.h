@@ -23,6 +23,10 @@
 # include <sys/xattr.h>
 # include <string.h>
 # include <errno.h>
+# define FLAG_A 1
+# define FLAG_L 2
+# define FLAG_REV 4
+# define FLAG_R 8
 
 typedef	struct			s_mystuff
 {
@@ -52,6 +56,7 @@ void					ft_readr(char *path,
 void					ft_listdel(t_mything *mylist);
 void					ft_add_elements(t_mything *mylist);
 void					ft_get_names(t_mything *mylist, struct stat statistics);
-void					ft_get_fileperm(t_mything *mylist, struct stat statistics);
+void					ft_get_fileperm(t_mything *mylist,
+						struct stat statistics);
 
 #endif

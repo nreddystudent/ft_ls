@@ -80,6 +80,7 @@ void	ft_get_names(t_mything *mylist, struct stat statistics)
 
 void	ft_get_fileperm(t_mything *mylist, struct stat statistics)
 {
+	mylist->permission[0] = S_ISDIR(statistics.st_mode) ? 'd' : '-';
 	mylist->permission[1] = statistics.st_mode & S_IRUSR ? 'r' : '-';
 	mylist->permission[2] = statistics.st_mode & S_IWUSR ? 'w' : '-';
 	mylist->permission[3] = statistics.st_mode & S_IXUSR ? 'x' : '-';
