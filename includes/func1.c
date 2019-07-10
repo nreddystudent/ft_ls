@@ -80,22 +80,13 @@ void	ft_get_names(t_mything *mylist, struct stat statistics)
 
 void	ft_get_fileperm(t_mything *mylist, struct stat statistics)
 {
-	statistics.st_mode & S_IRUSR ? (mylist->permission[0] = 'r')
-	: (mylist->permission[0] = '-');
-	statistics.st_mode & S_IWUSR ? (mylist->permission[1] = 'w')
-	: (mylist->permission[1] = '-');
-	statistics.st_mode & S_IXUSR ? (mylist->permission[2] = 'x')
-	: (mylist->permission[2] = '-');
-	statistics.st_mode & S_IRGRP ? (mylist->permission[3] = 'r')
-	: (mylist->permission[3] = '-');
-	statistics.st_mode & S_IWGRP ? (mylist->permission[4] = 'w')
-	: (mylist->permission[4] = '-');
-	statistics.st_mode & S_IXGRP ? (mylist->permission[5] = 'x')
-	: (mylist->permission[5] = '-');
-	statistics.st_mode & S_IROTH ? (mylist->permission[6] = 'r')
-	: (mylist->permission[6] = '-');
-	statistics.st_mode & S_IWOTH ? (mylist->permission[7] = 'w')
-	: (mylist->permission[7] = '-');
-	statistics.st_mode & S_IXOTH ? (mylist->permission[8] = 'x')
-	: (mylist->permission[8] = '-');
+	mylist->permission[1] = statistics.st_mode & S_IRUSR ? 'r' : '-';
+	mylist->permission[2] = statistics.st_mode & S_IWUSR ? 'w' : '-';
+	mylist->permission[3] = statistics.st_mode & S_IXUSR ? 'x' : '-';
+	mylist->permission[4] = statistics.st_mode & S_IRGRP ? 'r' : '-';
+	mylist->permission[5] = statistics.st_mode & S_IWGRP ? 'w' : '-';
+	mylist->permission[6] = statistics.st_mode & S_IXGRP ? 'x' : '-';
+	mylist->permission[7] = statistics.st_mode & S_IROTH ? 'r' : '-';
+	mylist->permission[8] = statistics.st_mode & S_IWOTH ? 'w' : '-';
+	mylist->permission[9] = statistics.st_mode & S_IXOTH ? 'x' : '-';
 }
