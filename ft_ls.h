@@ -27,6 +27,7 @@
 # define FLAG_L 2
 # define FLAG_REV 4
 # define FLAG_R 8
+# define FLAG_T 32
 
 typedef	struct			s_mystuff
 {

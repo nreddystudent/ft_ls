@@ -79,7 +79,6 @@ void		ft_read(char *path, unsigned char c)
 
 void		ft_ls(int argc, char **argv, unsigned char c, int i)
 {
-	(void)c;
 	(void)argc;
 	ft_read(argv[i], c);
 }
