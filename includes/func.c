@@ -13,7 +13,7 @@
 #include "../ft_ls.h"
 #include "../libft/libft.h"
 
-t_mything	*ft_listnew(char *content)
+t_mything	*ft_listnew(char *content, char *path)
 {
 	t_mything	*listn;
 
@@ -23,7 +23,7 @@ t_mything	*ft_listnew(char *content)
 	if (!(listn->d_name = ft_strdup(content)))
 		return (NULL);
 	listn->next = NULL;
-	ft_add_elements(listn);
+	ft_add_elements(listn, path);
 	return (listn);
 }
 

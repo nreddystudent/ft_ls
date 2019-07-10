@@ -34,16 +34,18 @@ typedef	struct			s_mystuff
 	char				*d_name;
 	char				*user;
 	char				*group;
-	char				permission[10];
+	char				permission[11];
+	int					nlink;
+	int					filesize;
 	struct s_mystuff	*next;
 }						t_mything;
 
 void					ft_recursion(char *argv, struct dirent *ptrf);
-t_mything				*ft_listnew(char *content);
+t_mything				*ft_listnew(char *content, char *path);
 int						ft_is_dir(const char *pname);
 t_mything				*ft_listcreate(t_mything *mylist,
-						t_mything *new, struct dirent *ptrf);
-void					ft_printlist(t_mything *mylist);
+						t_mything *new, struct dirent *ptrf, char *path);
+void					ft_printlist(t_mything *mylist, unsigned char c);
 void					ft_ls(int argc, char **argv, unsigned char c, int i);
 void					ft_read(char *path, unsigned char c);
 void					ft_listadd(t_mything **list, t_mything *new);
@@ -55,9 +57,11 @@ t_mything				*ft_sortedmerge(t_mything *fh,
 void					ft_readr(char *path,
 						unsigned char c, t_mything *mylist);
 void					ft_listdel(t_mything *mylist);
-void					ft_add_elements(t_mything *mylist);
+void					ft_add_elements(t_mything *mylist, char *path);
 void					ft_get_names(t_mything *mylist, struct stat statistics);
 void					ft_get_fileperm(t_mything *mylist,
 						struct stat statistics);
+void					ft_printlong(t_mything *mylist);
+void					ft_getlinks(t_mything *mylist, char *path);
 
 #endif

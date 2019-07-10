@@ -56,13 +56,15 @@ void	ft_listdel(t_mything *mylist)
 	}
 }
 
-void	ft_add_elements(t_mything *mylist)
+void	ft_add_elements(t_mything *mylist, char *path)
 {
 	struct stat	statistics;
 
-	stat(mylist->d_name, &statistics);
-	ft_get_names(mylist, statistics);
+	stat(path, &statistics);
 	ft_get_fileperm(mylist, statistics);
+	ft_getlinks(mylist, path);
+	ft_get_names(mylist, statistics);
+	ft_getsize(mylist);
 }
 
 void	ft_get_names(t_mything *mylist, struct stat statistics)
@@ -80,7 +82,7 @@ void	ft_get_names(t_mything *mylist, struct stat statistics)
 
 void	ft_get_fileperm(t_mything *mylist, struct stat statistics)
 {
-	mylist->permission[0] = S_ISDIR(statistics.st_mode) ? 'd' : '-';
+	mylist->permission[0] = (ft_is_dir(mylist->d_name)) ? 'd' : '-';
 	mylist->permission[1] = statistics.st_mode & S_IRUSR ? 'r' : '-';
 	mylist->permission[2] = statistics.st_mode & S_IWUSR ? 'w' : '-';
 	mylist->permission[3] = statistics.st_mode & S_IXUSR ? 'x' : '-';
@@ -90,4 +92,5 @@ void	ft_get_fileperm(t_mything *mylist, struct stat statistics)
 	mylist->permission[7] = statistics.st_mode & S_IROTH ? 'r' : '-';
 	mylist->permission[8] = statistics.st_mode & S_IWOTH ? 'w' : '-';
 	mylist->permission[9] = statistics.st_mode & S_IXOTH ? 'x' : '-';
+	mylist->permission[10] = '\0';
 }

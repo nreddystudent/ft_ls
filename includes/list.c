@@ -14,27 +14,29 @@
 #include "../ft_ls.h"
 
 t_mything	*ft_listcreate(t_mything *mylist,
-			t_mything *new, struct dirent *ptrf)
+			t_mything *new, struct dirent *ptrf, char *path)
 {
 	if (mylist == NULL)
 	{
-		mylist = ft_listnew(ptrf->d_name);
+		mylist = ft_listnew(ptrf->d_name, path);
 		return (mylist);
 	}
 	else
 	{
-		new = ft_listnew(ptrf->d_name);
+		new = ft_listnew(ptrf->d_name, path);
 		ft_listadd(&mylist, new);
 		return (mylist);
 	}
 }
 
-void		ft_printlist(t_mything *mylist)
+void		ft_printlist(t_mything *mylist, unsigned char c)
 {
 	while (mylist != NULL)
 	{
+		if (c & FLAG_L)
+			ft_printlong(mylist);
 		ft_putstr(mylist->d_name);
-		ft_putstr("   ");
+		ft_putstr("   \n");
 		mylist = mylist->next;
 	}
 	ft_putchar('\n');
@@ -58,22 +60,19 @@ void		ft_read(char *path, unsigned char c)
 	ptrmystuff = NULL;
 	new = NULL;
 	file = opendir(path);
-	if (errno == 13)
-	{
-		ft_putstr("permission denied");
+	if (file == NULL)
 		return ;
-	}
 	while ((ptr = readdir(file)))
 	{
 		if (!(c & FLAG_A) && (ptr->d_name[0] == '.'))
 			continue ;
-		ptrmystuff = ft_listcreate(ptrmystuff, new, ptr);
+		ptrmystuff = ft_listcreate(ptrmystuff, new, ptr, path);
 	}
 	closedir(file);
 	ft_sortlist(&ptrmystuff, c);
 	if (c & FLAG_R)
 		ft_readr(path, c, ptrmystuff);
-	ft_printlist(ptrmystuff);
+	ft_printlist(ptrmystuff, c);
 	ft_listdel(ptrmystuff);
 }
 
