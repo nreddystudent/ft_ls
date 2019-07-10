@@ -65,13 +65,13 @@ void		ft_read(char *path, unsigned char c)
 	}
 	while ((ptr = readdir(file)))
 	{
-		if (!(c & 1) && (ptr->d_name[0] == '.'))
+		if (!(c & FLAG_A) && (ptr->d_name[0] == '.'))
 			continue ;
 		ptrmystuff = ft_listcreate(ptrmystuff, new, ptr);
 	}
 	closedir(file);
 	ft_sortlist(&ptrmystuff, c);
-	if (c & 8)
+	if (c & FLAG_R)
 		ft_readr(path, c, ptrmystuff);
 	ft_printlist(ptrmystuff);
 	ft_listdel(ptrmystuff);

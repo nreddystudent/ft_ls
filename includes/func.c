@@ -78,12 +78,12 @@ t_mything	*ft_sortedmerge(t_mything *fh, t_mything *bh, unsigned char c)
 		return (bh);
 	else if (bh == NULL)
 		return (fh);
-	if (!(c & 4) && (ft_strcmp(fh->d_name, bh->d_name)) < 0)
+	if (!(c & FLAG_REV) && (ft_strcmp(fh->d_name, bh->d_name)) < 0)
 	{
 		result = fh;
 		result->next = ft_sortedmerge(fh->next, bh, c);
 	}
-	else if ((c & 4) && (ft_strcmp(fh->d_name, bh->d_name)) > 0)
+	else if ((c & FLAG_REV) && (ft_strcmp(fh->d_name, bh->d_name)) > 0)
 	{
 		result = fh;
 		result->next = ft_sortedmerge(fh->next, bh, c);
