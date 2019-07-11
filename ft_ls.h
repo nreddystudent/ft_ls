@@ -64,5 +64,7 @@ void					ft_get_fileperm(t_mything *mylist,
 void					ft_printlong(t_mything *mylist);
 void					ft_getlinks(t_mything *mylist, char *path);
 int						ft_islink(const char *pname);
+void					ft_getsize(t_mything *mylist, char *path);
+
 
 #endif
