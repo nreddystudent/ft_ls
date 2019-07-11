@@ -20,15 +20,17 @@ void	ft_readr(char *path, unsigned char c,
 	char *str2;
 
 	while (mylist != NULL)
-	{
+	{	
+		str1 = ft_strjoin("/", mylist->d_name);
+		str2 = ft_strjoin(path, str1);
+
 		if ((ft_strcmp(".", mylist->d_name) == 0)
-		|| (ft_strcmp("..", mylist->d_name) == 0))
+		|| (ft_strcmp("..", mylist->d_name) == 0) || (ft_islink(str2)))
 		{
 			mylist = mylist->next;
 			continue ;
 		}
-		str1 = ft_strjoin("/", mylist->d_name);
-		str2 = ft_strjoin(path, str1);
+		
 		free(str1);
 		if ((ft_is_dir(str2) == 1))
 		{
