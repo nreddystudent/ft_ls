@@ -37,6 +37,8 @@ typedef	struct			s_mystuff
 	char				permission[11];
 	int					nlink;
 	int					filesize;
+	char				date[13];
+	int					total;
 	struct s_mystuff	*next;
 }						t_mything;
 
@@ -62,9 +64,9 @@ void					ft_get_names(t_mything *mylist, struct stat statistics);
 void					ft_get_fileperm(t_mything *mylist,
 						struct stat statistics, char *path);
 void					ft_printlong(t_mything *mylist);
-void					ft_getlinks(t_mything *mylist, char *path);
+void					ft_getlisi(t_mything *mylist, struct stat statisics);
 int						ft_islink(const char *pname);
-void					ft_getsize(t_mything *mylist, char *path);
+void					ft_gettime(t_mything *mylist, struct stat statistics);
 
 
 #endif

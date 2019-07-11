@@ -24,7 +24,7 @@ void	ft_checkflags(unsigned char *c, int *ptri, int x, char **argv)
 	if (argv[*ptri][x] == 'R' && !(*c & FLAG_R))
 		*c += FLAG_R;
 	if (argv[*ptri][x] == 't' && !(*c & FLAG_T))
-		*c = FLAG_T;
+		*c += FLAG_T;
 }
 
 int		ft_check_args(char **argv, int *ptri, unsigned char *c, int argc)

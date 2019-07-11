@@ -60,17 +60,22 @@ void	ft_add_elements(t_mything *mylist, char *path)
 {
 	struct stat	statistics;
 	char *temp;
-	char *temp1;
+	char *rpath;
 
 	temp = ft_strjoin(path, "/");
-	temp1 = ft_strjoin(temp, mylist->d_name);
-	stat(path, &statistics);
-	ft_get_fileperm(mylist, statistics, temp1);
-	ft_getlinks(mylist, temp1);
+	rpath = ft_strjoin(temp, mylist->d_name);
+	if (ft_islink(rpath))
+	{
+		lstat(rpath, &statistics);
+	}
+	else
+		stat(rpath, &statistics);
+	ft_get_fileperm(mylist, statistics, rpath);
+	ft_getlisi(mylist, statistics);
 	ft_get_names(mylist, statistics);
-	ft_getsize(mylist, temp1);
+	ft_gettime(mylist, statistics);
 	free(temp);
-	free(temp1);
+	free(rpath);
 }
 
 void	ft_get_names(t_mything *mylist, struct stat statistics)

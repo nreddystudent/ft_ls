@@ -31,6 +31,22 @@ t_mything	*ft_listcreate(t_mything *mylist,
 
 void		ft_printlist(t_mything *mylist, unsigned char c)
 {
+	t_mything *temp;
+	int total;
+
+	temp = mylist;
+	total = 0;
+	if (c & FLAG_L)
+	{
+		ft_putstr("total ");
+		while (temp != NULL)
+		{
+			total += temp->total;
+			temp = temp->next;
+		}
+		ft_putnbr(total);
+		ft_putchar('\n');
+	}
 	while (mylist != NULL)
 	{
 		if (c & FLAG_L)
