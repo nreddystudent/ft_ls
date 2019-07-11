@@ -66,7 +66,7 @@ void	ft_add_elements(t_mything *mylist, char *path)
 	temp1 = ft_strjoin(temp, mylist->d_name);
 	stat(path, &statistics);
 	ft_get_fileperm(mylist, statistics, temp1);
-	ft_getlinks(mylist, path);
+	ft_getlinks(mylist, temp1);
 	ft_get_names(mylist, statistics);
 	free(temp);
 	free(temp1);

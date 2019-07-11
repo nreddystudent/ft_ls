@@ -15,16 +15,12 @@ void	ft_printlong(t_mything *mylist)
 
 void ft_getlinks(t_mything *mylist, char *path) 
 {
-	char *temp1;
-	char *temp2;
 	struct stat files;
-
-	temp1 = ft_strjoin(path, "/");
-	temp2 = ft_strjoin(temp1, mylist->d_name);
-		stat(temp2, &files);
+	if (mylist->permission[0] == 'l')
+			lstat(path, &files);
+	else
+		stat(path, &files);
 	mylist->nlink = files.st_nlink;
-	free(temp1);
-	free(temp2);
 }
 int			ft_islink(const char *pname)
 {
