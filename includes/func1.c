@@ -59,8 +59,8 @@ void	ft_listdel(t_mything *mylist)
 void	ft_add_elements(t_mything *mylist, char *path)
 {
 	struct stat	statistics;
-	char *temp;
-	char *rpath;
+	char		*temp;
+	char		*rpath;
 
 	temp = ft_strjoin(path, "/");
 	rpath = ft_strjoin(temp, mylist->d_name);

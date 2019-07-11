@@ -31,8 +31,8 @@ t_mything	*ft_listcreate(t_mything *mylist,
 
 void		ft_printlist(t_mything *mylist, unsigned char c)
 {
-	t_mything *temp;
-	int total;
+	t_mything	*temp;
+	int			total;
 
 	temp = mylist;
 	total = 0;
