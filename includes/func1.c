@@ -59,12 +59,17 @@ void	ft_listdel(t_mything *mylist)
 void	ft_add_elements(t_mything *mylist, char *path)
 {
 	struct stat	statistics;
+	char *temp;
+	char *temp1;
 
+	temp = ft_strjoin(path, "/");
+	temp1 = ft_strjoin(temp, mylist->d_name);
 	stat(path, &statistics);
-	ft_get_fileperm(mylist, statistics);
+	ft_get_fileperm(mylist, statistics, temp1);
 	ft_getlinks(mylist, path);
 	ft_get_names(mylist, statistics);
-	ft_getsize(mylist);
+	free(temp);
+	free(temp1);
 }
 
 void	ft_get_names(t_mything *mylist, struct stat statistics)
@@ -80,9 +85,11 @@ void	ft_get_names(t_mything *mylist, struct stat statistics)
 	mylist->user = ft_strdup(uid->pw_name);
 }
 
-void	ft_get_fileperm(t_mything *mylist, struct stat statistics)
+void	ft_get_fileperm(t_mything *mylist, struct stat statistics, char *path)
 {
-	mylist->permission[0] = (ft_is_dir(mylist->d_name)) ? 'd' : '-';
+	mylist->permission[0] = (ft_is_dir(path)) ? 'd' : '-';
+	if (ft_islink(path))
+		mylist->permission[0] = 'l';
 	mylist->permission[1] = statistics.st_mode & S_IRUSR ? 'r' : '-';
 	mylist->permission[2] = statistics.st_mode & S_IWUSR ? 'w' : '-';
 	mylist->permission[3] = statistics.st_mode & S_IXUSR ? 'x' : '-';

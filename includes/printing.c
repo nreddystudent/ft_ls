@@ -26,3 +26,10 @@ void ft_getlinks(t_mything *mylist, char *path)
 	free(temp1);
 	free(temp2);
 }
+int			ft_islink(const char *pname)
+{
+	struct stat s;
+
+	lstat(pname, &s);
+	return (S_ISLNK(s.st_mode));
+}

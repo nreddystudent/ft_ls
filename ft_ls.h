@@ -60,8 +60,9 @@ void					ft_listdel(t_mything *mylist);
 void					ft_add_elements(t_mything *mylist, char *path);
 void					ft_get_names(t_mything *mylist, struct stat statistics);
 void					ft_get_fileperm(t_mything *mylist,
-						struct stat statistics);
+						struct stat statistics, char *path);
 void					ft_printlong(t_mything *mylist);
 void					ft_getlinks(t_mything *mylist, char *path);
+int						ft_islink(const char *pname);
 
 #endif
