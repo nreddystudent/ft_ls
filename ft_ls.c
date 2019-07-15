@@ -13,7 +13,7 @@
 #include "ft_ls.h"
 #include "libft/libft.h"
 
-void	ft_checkflags(unsigned char *c, int *ptri, int x, char **argv)
+void		ft_checkflags(unsigned char *c, int *ptri, int x, char **argv)
 {
 	if (argv[*ptri][x] == 'a' && !(*c & FLAG_A))
 		*c += FLAG_A;
@@ -27,7 +27,7 @@ void	ft_checkflags(unsigned char *c, int *ptri, int x, char **argv)
 		*c += FLAG_T;
 }
 
-int		ft_check_args(char **argv, int *ptri, unsigned char *c, int argc)
+int			ft_check_args(char **argv, int *ptri, unsigned char *c, int argc)
 {
 	int		x;
 
@@ -49,10 +49,43 @@ int		ft_check_args(char **argv, int *ptri, unsigned char *c, int argc)
 	return (*ptri);
 }
 
-int		main(int argc, char **argv)
+void		ft_sortarray(char **files)
+{
+	int		i;
+	char	*namedir;
+
+	i = 0;
+	while ((files[i] != NULL) && (files[i + 1] != NULL))
+	{
+		if (ft_strcmp(files[i], files[i + 1]) < 0 ||
+		(ft_strcmp(files[i], files[i + 1]) == 0))
+			i++;
+		else
+		{
+			namedir = files[i];
+			files[i] = files[i + 1];
+			files[i + 1] = namedir;
+			i = 0;
+		}
+	}
+}
+
+void		ft_multifile(char **multif, int argc, int i, char **argv)
+{
+	int		x;
+
+	x = 0;
+	while (i < argc)
+		multif[x++] = argv[i++];
+	multif[x] = NULL;
+	ft_sortarray(multif);
+}
+
+int			main(int argc, char **argv)
 {
 	int				i;
 	unsigned char	c;
+	char			*multif[argc];
 
 	i = 0;
 	if (argv[1] != NULL)
@@ -66,7 +99,9 @@ int		main(int argc, char **argv)
 	}
 	if (argc - 1 - i > 0)
 	{
-		ft_putstr("multiple files");
+		ft_multifile(multif, argc, i, argv);
+		c += FLAG_MF;
+		ft_ls(argc, multif, c, i);
 		return (0);
 	}
 	ft_ls(argc, argv, c, i);

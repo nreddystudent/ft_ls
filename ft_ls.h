@@ -28,6 +28,7 @@
 # define FLAG_REV 4
 # define FLAG_R 8
 # define FLAG_T 32
+# define FLAG_MF 64
 # define MAXPATHLEN 1024
 
 typedef	struct			s_mystuff

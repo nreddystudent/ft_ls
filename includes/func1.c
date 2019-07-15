@@ -89,9 +89,9 @@ void	ft_get_names(t_mything *mylist, struct stat statistics)
 	uid = NULL;
 	mylist->user = NULL;
 	mylist->group = NULL;
-	if(!(uid = getpwuid(statistics.st_uid)))
+	if (!(uid = getpwuid(statistics.st_uid)))
 		mylist->user = ft_itoa(statistics.st_uid);
-	if(!(gruid = getgrgid(statistics.st_gid)))
+	if (!(gruid = getgrgid(statistics.st_gid)))
 		mylist->group = ft_itoa(statistics.st_gid);
 	if (!(mylist->group))
 		mylist->group = ft_strdup(gruid->gr_name);

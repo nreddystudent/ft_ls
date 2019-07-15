@@ -103,5 +103,17 @@ void		ft_read(char *path, unsigned char c)
 void		ft_ls(int argc, char **argv, unsigned char c, int i)
 {
 	(void)argc;
-	ft_read(argv[i], c);
+	if (c & FLAG_MF)
+	{
+		i = 0;
+		while (argv[i] != NULL)
+		{
+			ft_putstr(argv[i]);
+			ft_putendl(" :");
+			ft_read(argv[i], c);
+			i += 1;
+		}
+	}
+	else
+		ft_read(argv[i], c);
 }
