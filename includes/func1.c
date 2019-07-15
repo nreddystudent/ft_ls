@@ -27,6 +27,8 @@ void	ft_readr(char *path, unsigned char c,
 		|| (ft_strcmp("..", mylist->d_name) == 0) || (ft_islink(str2)))
 		{
 			mylist = mylist->next;
+			free(str1);
+			free(str2);
 			continue ;
 		}
 		free(str1);

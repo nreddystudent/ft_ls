@@ -29,9 +29,13 @@ t_mything	*ft_listcreate(t_mything **myarray, struct dirent *ptrf, char *path,
 	}
 }
 
-void		ft_printlist(t_mything *mylist, unsigned char c, t_tots total)
+void		ft_printlist(t_mything *mylist, unsigned char c,
+						t_tots total, char *path)
 {
 	t_mything	*temp;
+	char		linkpath[MAXPATHLEN + 1];
+	char		*pathtemp;
+	char		*fullpath;
 
 	temp = mylist;
 	if (c & FLAG_L)
@@ -44,7 +48,19 @@ void		ft_printlist(t_mything *mylist, unsigned char c, t_tots total)
 	{
 		if (c & FLAG_L)
 			ft_printlong(mylist);
+	
 		ft_putstr(mylist->d_name);
+		if (mylist->permission[0] == 'l')
+		{
+			pathtemp = ft_strjoin(path, "/");
+			fullpath = ft_strjoin(pathtemp, mylist->d_name);
+			readlink(mylist->d_name, linkpath, MAXPATHLEN);
+			linkpath[MAXPATHLEN] = '\0';
+			ft_putstr(" -> ");
+			ft_putstr(linkpath);
+			free(pathtemp);
+			free(fullpath);
+		}
 		ft_putstr("   \n");
 		mylist = mylist->next;
 	}
@@ -80,7 +96,7 @@ void		ft_read(char *path, unsigned char c)
 	ft_sortlist(&(ptrarray[0]), c);
 	if (c & FLAG_R)
 		ft_readr(path, c, ptrarray[0]);
-	ft_printlist(ptrarray[0], c, total);
+	ft_printlist(ptrarray[0], c, total, path);
 	ft_listdel(ptrarray[0]);
 }
 

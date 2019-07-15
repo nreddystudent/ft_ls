@@ -28,6 +28,7 @@
 # define FLAG_REV 4
 # define FLAG_R 8
 # define FLAG_T 32
+# define MAXPATHLEN 1024
 
 typedef	struct			s_mystuff
 {
@@ -52,7 +53,7 @@ int						ft_is_dir(const char *pname);
 t_mything				*ft_listcreate(t_mything **myarray, struct dirent *ptrf,
 						char *path, t_tots *total);
 void					ft_printlist(t_mything *mylist, unsigned char c,
-						t_tots total);
+						t_tots total, char *path);
 void					ft_ls(int argc, char **argv, unsigned char c, int i);
 void					ft_read(char *path, unsigned char c);
 void					ft_listadd(t_mything **list, t_mything *new);
