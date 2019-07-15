@@ -87,10 +87,16 @@ void	ft_get_names(t_mything *mylist, struct stat statistics)
 
 	gruid = NULL;
 	uid = NULL;
-	uid = getpwuid(statistics.st_uid);
-	gruid = getgrgid(statistics.st_gid);
-	mylist->group = ft_strdup(gruid->gr_name);
-	mylist->user = ft_strdup(uid->pw_name);
+	mylist->user = NULL;
+	mylist->group = NULL;
+	if(!(uid = getpwuid(statistics.st_uid)))
+		mylist->user = ft_itoa(statistics.st_uid);
+	if(!(gruid = getgrgid(statistics.st_gid)))
+		mylist->group = ft_itoa(statistics.st_gid);
+	if (!(mylist->group))
+		mylist->group = ft_strdup(gruid->gr_name);
+	if (!(mylist->user))
+		mylist->user = ft_strdup(uid->pw_name);
 }
 
 void	ft_get_fileperm(t_mything *mylist, struct stat statistics, char *path)

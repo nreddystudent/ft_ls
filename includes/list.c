@@ -54,8 +54,8 @@ void		ft_printlist(t_mything *mylist, unsigned char c,
 		{
 			pathtemp = ft_strjoin(path, "/");
 			fullpath = ft_strjoin(pathtemp, mylist->d_name);
-			readlink(mylist->d_name, linkpath, MAXPATHLEN);
-			linkpath[MAXPATHLEN] = '\0';
+			ft_bzero(linkpath, MAXPATHLEN);
+			readlink(fullpath, linkpath, MAXPATHLEN);
 			ft_putstr(" -> ");
 			ft_putstr(linkpath);
 			free(pathtemp);
