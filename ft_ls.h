@@ -38,16 +38,21 @@ typedef	struct			s_mystuff
 	int					nlink;
 	int					filesize;
 	char				date[13];
-	int					total;
 	struct s_mystuff	*next;
 }						t_mything;
 
+typedef struct 			s_tots
+{
+	int					total;
+}						t_tots;
+
 void					ft_recursion(char *argv, struct dirent *ptrf);
-t_mything				*ft_listnew(char *content, char *path);
+t_mything				*ft_listnew(char *content, char *path, t_tots *total);
 int						ft_is_dir(const char *pname);
-t_mything				*ft_listcreate(t_mything *mylist,
-						t_mything *new, struct dirent *ptrf, char *path);
-void					ft_printlist(t_mything *mylist, unsigned char c);
+t_mything				*ft_listcreate(t_mything **myarray, struct dirent *ptrf,
+						char *path, t_tots *total);
+void					ft_printlist(t_mything *mylist, unsigned char c,
+						t_tots total);
 void					ft_ls(int argc, char **argv, unsigned char c, int i);
 void					ft_read(char *path, unsigned char c);
 void					ft_listadd(t_mything **list, t_mything *new);
@@ -59,14 +64,17 @@ t_mything				*ft_sortedmerge(t_mything *fh,
 void					ft_readr(char *path,
 						unsigned char c, t_mything *mylist);
 void					ft_listdel(t_mything *mylist);
-void					ft_add_elements(t_mything *mylist, char *path);
+void					ft_add_elements(t_mything *mylist, char *path,
+						t_tots *total);
 void					ft_get_names(t_mything *mylist, struct stat statistics);
 void					ft_get_fileperm(t_mything *mylist,
 						struct stat statistics, char *path);
 void					ft_printlong(t_mything *mylist);
-void					ft_getlisi(t_mything *mylist, struct stat statisics);
+void					ft_getlisi(t_mything *mylist, struct stat statisics,
+						t_tots *total);
 int						ft_islink(const char *pname);
 void					ft_gettime(t_mything *mylist, struct stat statistics);
-
+t_mything				**ft_setarray(t_mything **ptrarray, t_tots *total);
+t_mything				**ft_setarray(t_mything **ptrarray, t_tots *total);
 
 #endif

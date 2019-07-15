@@ -47,11 +47,11 @@ void	ft_printlong(t_mything *mylist)
 	ft_putchar(' ');
 }
 
-void	ft_getlisi(t_mything *mylist, struct stat statisics)
+void	ft_getlisi(t_mything *mylist, struct stat statisics, t_tots *total)
 {
 	mylist->nlink = statisics.st_nlink;
 	mylist->filesize = statisics.st_size;
-	mylist->total = statisics.st_blocks;
+	total->total += statisics.st_blocks;
 }
 
 int		ft_islink(const char *pname)

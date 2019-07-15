@@ -20,21 +20,19 @@ void	ft_readr(char *path, unsigned char c,
 	char *str2;
 
 	while (mylist != NULL)
-	{	
+	{
 		str1 = ft_strjoin("/", mylist->d_name);
 		str2 = ft_strjoin(path, str1);
-
 		if ((ft_strcmp(".", mylist->d_name) == 0)
 		|| (ft_strcmp("..", mylist->d_name) == 0) || (ft_islink(str2)))
 		{
 			mylist = mylist->next;
 			continue ;
 		}
-		
 		free(str1);
 		if ((ft_is_dir(str2) == 1))
 		{
-			ft_putstr(mylist->d_name);
+			ft_putstr(str2);
 			ft_putstr(":\n");
 			ft_read(str2, c);
 		}
@@ -58,7 +56,7 @@ void	ft_listdel(t_mything *mylist)
 	}
 }
 
-void	ft_add_elements(t_mything *mylist, char *path)
+void	ft_add_elements(t_mything *mylist, char *path, t_tots *total)
 {
 	struct stat	statistics;
 	char		*temp;
@@ -73,7 +71,7 @@ void	ft_add_elements(t_mything *mylist, char *path)
 	else
 		stat(rpath, &statistics);
 	ft_get_fileperm(mylist, statistics, rpath);
-	ft_getlisi(mylist, statistics);
+	ft_getlisi(mylist, statistics, total);
 	ft_get_names(mylist, statistics);
 	ft_gettime(mylist, statistics);
 	free(temp);

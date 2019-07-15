@@ -13,38 +13,31 @@
 #include "../libft/libft.h"
 #include "../ft_ls.h"
 
-t_mything	*ft_listcreate(t_mything *mylist,
-			t_mything *new, struct dirent *ptrf, char *path)
+t_mything	*ft_listcreate(t_mything **myarray, struct dirent *ptrf, char *path,
+			t_tots *total)
 {
-	if (mylist == NULL)
+	if (myarray[0] == NULL)
 	{
-		mylist = ft_listnew(ptrf->d_name, path);
-		return (mylist);
+		myarray[0] = ft_listnew(ptrf->d_name, path, total);
+		return (myarray[0]);
 	}
 	else
 	{
-		new = ft_listnew(ptrf->d_name, path);
-		ft_listadd(&mylist, new);
-		return (mylist);
+		myarray[1] = ft_listnew(ptrf->d_name, path, total);
+		ft_listadd(&myarray[0], myarray[1]);
+		return (myarray[0]);
 	}
 }
 
-void		ft_printlist(t_mything *mylist, unsigned char c)
+void		ft_printlist(t_mything *mylist, unsigned char c, t_tots total)
 {
 	t_mything	*temp;
-	int			total;
 
 	temp = mylist;
-	total = 0;
 	if (c & FLAG_L)
 	{
 		ft_putstr("total ");
-		while (temp != NULL)
-		{
-			total += temp->total;
-			temp = temp->next;
-		}
-		ft_putnbr(total);
+		ft_putnbr(total.total);
 		ft_putchar('\n');
 	}
 	while (mylist != NULL)
@@ -70,11 +63,10 @@ void		ft_read(char *path, unsigned char c)
 {
 	DIR				*file;
 	struct dirent	*ptr;
-	t_mything		*ptrmystuff;
-	t_mything		*new;
+	t_mything		*ptrarray[2];
+	t_tots			total;
 
-	ptrmystuff = NULL;
-	new = NULL;
+	ft_setarray(ptrarray, &total);
 	file = opendir(path);
 	if (file == NULL)
 		return ;
@@ -82,14 +74,14 @@ void		ft_read(char *path, unsigned char c)
 	{
 		if (!(c & FLAG_A) && (ptr->d_name[0] == '.'))
 			continue ;
-		ptrmystuff = ft_listcreate(ptrmystuff, new, ptr, path);
+		ptrarray[0] = ft_listcreate(ptrarray, ptr, path, &total);
 	}
 	closedir(file);
-	ft_sortlist(&ptrmystuff, c);
+	ft_sortlist(&(ptrarray[0]), c);
 	if (c & FLAG_R)
-		ft_readr(path, c, ptrmystuff);
-	ft_printlist(ptrmystuff, c);
-	ft_listdel(ptrmystuff);
+		ft_readr(path, c, ptrarray[0]);
+	ft_printlist(ptrarray[0], c, total);
+	ft_listdel(ptrarray[0]);
 }
 
 void		ft_ls(int argc, char **argv, unsigned char c, int i)
