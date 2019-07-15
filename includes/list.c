@@ -33,9 +33,7 @@ void		ft_printlist(t_mything *mylist, unsigned char c,
 						t_tots total, char *path)
 {
 	t_mything	*temp;
-	char		linkpath[MAXPATHLEN + 1];
-	char		*pathtemp;
-	char		*fullpath;
+	
 
 	temp = mylist;
 	if (c & FLAG_L)
@@ -50,17 +48,8 @@ void		ft_printlist(t_mything *mylist, unsigned char c,
 			ft_printlong(mylist);
 	
 		ft_putstr(mylist->d_name);
-		if (mylist->permission[0] == 'l')
-		{
-			pathtemp = ft_strjoin(path, "/");
-			fullpath = ft_strjoin(pathtemp, mylist->d_name);
-			ft_bzero(linkpath, MAXPATHLEN);
-			readlink(fullpath, linkpath, MAXPATHLEN);
-			ft_putstr(" -> ");
-			ft_putstr(linkpath);
-			free(pathtemp);
-			free(fullpath);
-		}
+		if (mylist->permission[0] == 'l' && c & FLAG_L)
+			ft_printlink(path, mylist);	
 		ft_putstr("   \n");
 		mylist = mylist->next;
 	}

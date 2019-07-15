@@ -25,3 +25,19 @@ t_mything	**ft_setarray(t_mything **ptrarray, t_tots *total)
 	total->total = 0;
 	return (ptrarray);
 }
+
+void ft_printlink(char *path, t_mything *mylist)
+{
+	char		linkpath[MAXPATHLEN + 1];
+	char		*pathtemp;
+	char		*fullpath;
+
+	pathtemp = ft_strjoin(path, "/");
+	fullpath = ft_strjoin(pathtemp, mylist->d_name);
+	ft_bzero(linkpath, MAXPATHLEN);
+	readlink(fullpath, linkpath, MAXPATHLEN);
+	ft_putstr(" -> ");
+	ft_putstr(linkpath);
+	free(pathtemp);
+	free(fullpath);
+}

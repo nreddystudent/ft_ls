@@ -78,5 +78,6 @@ int						ft_islink(const char *pname);
 void					ft_gettime(t_mything *mylist, struct stat statistics);
 t_mything				**ft_setarray(t_mything **ptrarray, t_tots *total);
 t_mything				**ft_setarray(t_mything **ptrarray, t_tots *total);
+void					ft_printlink(char *path, t_mything *mylist);
 
 #endif
