@@ -33,7 +33,6 @@ void		ft_printlist(t_mything *mylist, unsigned char c,
 						t_tots total, char *path)
 {
 	t_mything	*temp;
-	
 
 	temp = mylist;
 	if (c & FLAG_L)
@@ -46,10 +45,9 @@ void		ft_printlist(t_mything *mylist, unsigned char c,
 	{
 		if (c & FLAG_L)
 			ft_printlong(mylist);
-	
 		ft_putstr(mylist->d_name);
 		if (mylist->permission[0] == 'l' && c & FLAG_L)
-			ft_printlink(path, mylist);	
+			ft_printlink(path, mylist);
 		ft_putstr("   \n");
 		mylist = mylist->next;
 	}

@@ -26,7 +26,7 @@ t_mything	**ft_setarray(t_mything **ptrarray, t_tots *total)
 	return (ptrarray);
 }
 
-void ft_printlink(char *path, t_mything *mylist)
+void		ft_printlink(char *path, t_mything *mylist)
 {
 	char		linkpath[MAXPATHLEN + 1];
 	char		*pathtemp;
