@@ -68,3 +68,19 @@ t_mything	*ft_sortedmerge_t(t_mything *fh, t_mything *bh, unsigned char c)
 	}
 	return (result);
 }
+
+void	ft_printdate(t_mything *mylist)
+{
+	char *str;
+	char *times;
+	
+	str = mylist->date + 3;
+	str[3] = '\0';
+	ft_putstr(str);
+	ft_putchar(' ');
+	mylist->date[3] = '\0';
+	ft_putstr(mylist->date);
+	ft_putchar(' ');
+	times = mylist->date + 7;
+	ft_putstr(times);
+}

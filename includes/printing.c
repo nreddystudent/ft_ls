@@ -43,7 +43,7 @@ void	ft_printlong(t_mything *mylist)
 	ft_putstr("        ");
 	ft_putnbr(mylist->filesize);
 	ft_checkspacing(mylist->filesize);
-	ft_putstr(mylist->date);
+	ft_printdate(mylist);
 	ft_putchar(' ');
 }
 
