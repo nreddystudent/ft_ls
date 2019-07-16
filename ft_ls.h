@@ -83,6 +83,7 @@ void					ft_printlink(char *path, t_mything *mylist);
 t_mything				*ft_sortedmerge_t(t_mything *fh,
 						t_mything *bh, unsigned char c);
 void					ft_printdate(t_mything *mylist);
-
+void					ft_checkspacing(int n);
+void					ft_checkspacing_R(int n);
 
 #endif

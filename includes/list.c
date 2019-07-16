@@ -48,7 +48,12 @@ void		ft_printlist(t_mything *mylist, unsigned char c,
 		ft_putstr(mylist->d_name);
 		if (mylist->permission[0] == 'l' && c & FLAG_L)
 			ft_printlink(path, mylist);
-		ft_putstr("   \n");
+		if (c & FLAG_L)
+			ft_putstr("   \n");
+		else if (c & FLAG_R)
+			ft_checkspacing_R(ft_strlen(mylist->d_name));
+		else
+			ft_putstr("   ");
 		mylist = mylist->next;
 	}
 	ft_putchar('\n');
@@ -72,7 +77,11 @@ void		ft_read(char *path, unsigned char c)
 	ft_setarray(ptrarray, &total);
 	file = opendir(path);
 	if (file == NULL)
+	{
+		ft_putstr(strerror(errno));
+		ft_putchar('\n');
 		return ;
+	}
 	while ((ptr = readdir(file)))
 	{
 		if (!(c & FLAG_A) && (ptr->d_name[0] == '.'))

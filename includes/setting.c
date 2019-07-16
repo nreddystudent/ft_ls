@@ -84,3 +84,13 @@ void	ft_printdate(t_mything *mylist)
 	times = mylist->date + 7;
 	ft_putstr(times);
 }
+
+void	ft_checkspacing_R(int n)
+{
+	if (n < 16)
+		n = 16 - n;
+	else
+		n = n - 16;
+	while (n-- > 0)
+		ft_putchar(' ');
+}

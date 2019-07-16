@@ -36,6 +36,8 @@ int			ft_check_args(char **argv, int *ptri, unsigned char *c, int argc)
 		x = 0;
 		while (argv[*ptri][x])
 		{
+			if (argv[*ptri][x + 1] == '-')
+				return(*ptri + 1);
 			ft_checkflags(c, ptri, x, argv);
 			x++;
 		}
