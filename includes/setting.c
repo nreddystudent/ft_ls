@@ -41,3 +41,30 @@ void		ft_printlink(char *path, t_mything *mylist)
 	free(pathtemp);
 	free(fullpath);
 }
+
+t_mything	*ft_sortedmerge_t(t_mything *fh, t_mything *bh, unsigned char c)
+{
+	t_mything *result;
+
+	result = NULL;
+	if (fh == NULL)
+		return (bh);
+	else if (bh == NULL)
+		return (fh);
+	if (!(c & FLAG_REV) && (fh->rawtime > bh->rawtime))
+	{
+		result = fh;
+		result->next = ft_sortedmerge_t(fh->next, bh, c);
+	}
+	else if ((c & FLAG_REV) && (fh->rawtime < bh->rawtime))
+	{
+		result = fh;
+		result->next = ft_sortedmerge_t(fh->next, bh, c);
+	}
+	else
+	{
+		result = bh;
+		result->next = ft_sortedmerge_t(fh, bh->next, c);
+	}
+	return (result);
+}

@@ -40,10 +40,11 @@ typedef	struct			s_mystuff
 	int					nlink;
 	int					filesize;
 	char				date[13];
+	time_t				rawtime;
 	struct s_mystuff	*next;
 }						t_mything;
 
-typedef struct 			s_tots
+typedef struct			s_tots
 {
 	int					total;
 }						t_tots;
@@ -79,5 +80,7 @@ void					ft_gettime(t_mything *mylist, struct stat statistics);
 t_mything				**ft_setarray(t_mything **ptrarray, t_tots *total);
 t_mything				**ft_setarray(t_mything **ptrarray, t_tots *total);
 void					ft_printlink(char *path, t_mything *mylist);
+t_mything				*ft_sortedmerge_t(t_mything *fh,
+						t_mything *bh, unsigned char c);
 
 #endif

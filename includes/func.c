@@ -45,7 +45,10 @@ void		ft_sortlist(t_mything **headref, unsigned char c)
 	frontbacksplit(head, &fh, &bh);
 	ft_sortlist(&fh, c);
 	ft_sortlist(&bh, c);
-	*headref = ft_sortedmerge(fh, bh, c);
+	if (c & FLAG_T)
+		*headref = ft_sortedmerge_t(fh, bh, c);
+	else
+		*headref = ft_sortedmerge(fh, bh, c);
 }
 
 void		frontbacksplit(t_mything *head, t_mything **fh, t_mything **bh)

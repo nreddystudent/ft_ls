@@ -74,5 +74,6 @@ void	ft_gettime(t_mything *mylist, struct stat statistics)
 	while (i < 16)
 		mylist->date[x++] = date[i++];
 	mylist->date[12] = '\0';
+	mylist->rawtime = statistics.st_mtime;
 	free(date);
 }
