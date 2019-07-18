@@ -14,7 +14,7 @@
 #include "../libft/libft.h"
 
 void	ft_readr(char *path, unsigned char c,
-		t_mything *mylist)
+		t_mything *mylist, t_tots total)
 {
 	char *str1;
 	char *str2;
@@ -36,6 +36,7 @@ void	ft_readr(char *path, unsigned char c,
 		{
 			ft_putstr(str2);
 			ft_putstr(":\n");
+			ft_printlist(mylist, c, total, path);
 			ft_read(str2, c);
 		}
 		free(str2);

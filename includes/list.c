@@ -57,6 +57,8 @@ void		ft_printlist(t_mything *mylist, unsigned char c,
 		mylist = mylist->next;
 	}
 	ft_putchar('\n');
+	if (c & FLAG_R)
+		ft_putchar('\n');
 }
 
 int			ft_is_dir(const char *pname)
@@ -90,9 +92,9 @@ void		ft_read(char *path, unsigned char c)
 	}
 	closedir(file);
 	ft_sortlist(&(ptrarray[0]), c);
-	if (c & FLAG_R)
-		ft_readr(path, c, ptrarray[0]);
 	ft_printlist(ptrarray[0], c, total, path);
+	if (c & FLAG_R)
+		ft_readr(path, c, ptrarray[0], total);
 	ft_listdel(ptrarray[0]);
 }
 
