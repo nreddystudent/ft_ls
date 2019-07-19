@@ -1,37 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   func.c                                             :+:      :+:    :+:   */
+/*   sorting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nreddy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/05 15:11:55 by nreddy            #+#    #+#             */
-/*   Updated: 2019/07/05 15:11:59 by nreddy           ###   ########.fr       */
+/*   Created: 2019/07/19 09:00:01 by nreddy            #+#    #+#             */
+/*   Updated: 2019/07/19 09:00:13 by nreddy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_ls.h"
 #include "../libft/libft.h"
-
-t_mything	*ft_listnew(char *content, char *path, t_tots *total)
-{
-	t_mything	*listn;
-
-	listn = NULL;
-	if (!(listn = (t_mything *)malloc(sizeof(t_mything))))
-		return (NULL);
-	if (!(listn->d_name = ft_strdup(content)))
-		return (NULL);
-	listn->next = NULL;
-	ft_add_elements(listn, path, total);
-	return (listn);
-}
-
-void		ft_listadd(t_mything **list, t_mything *new)
-{
-	new->next = *list;
-	*list = new;
-}
+#include "../ft_ls.h"
 
 void		ft_sortlist(t_mything **headref, unsigned char c)
 {
@@ -97,4 +77,53 @@ t_mything	*ft_sortedmerge(t_mything *fh, t_mything *bh, unsigned char c)
 		result->next = ft_sortedmerge(fh, bh->next, c);
 	}
 	return (result);
+}
+
+t_mything	*ft_sortedmerge_t(t_mything *fh, t_mything *bh, unsigned char c)
+{
+	t_mything *result;
+
+	result = NULL;
+	if (fh == NULL)
+		return (bh);
+	else if (bh == NULL)
+		return (fh);
+	if (!(c & FLAG_REV) && (fh->rawtime > bh->rawtime))
+	{
+		result = fh;
+		result->next = ft_sortedmerge_t(fh->next, bh, c);
+	}
+	else if ((c & FLAG_REV) && (fh->rawtime < bh->rawtime))
+	{
+		result = fh;
+		result->next = ft_sortedmerge_t(fh->next, bh, c);
+	}
+	else if (fh->rawtime == bh->rawtime)
+		ft_checknano(c, fh, bh, &result);
+	else
+	{
+		result = bh;
+		result->next = ft_sortedmerge_t(fh, bh->next, c);
+	}
+	return (result);
+}
+
+void		ft_checknano(unsigned char c, t_mything *fh, t_mything *bh,
+					t_mything **result)
+{
+	if (!(FLAG_REV & c) && (fh->rawtimen > bh->rawtimen))
+	{
+		*result = fh;
+		(*result)->next = ft_sortedmerge_t(fh->next, bh, c);
+	}
+	else if ((FLAG_REV & c) && (fh->rawtimen < bh->rawtimen))
+	{
+		*result = fh;
+		(*result)->next = ft_sortedmerge_t(fh->next, bh, c);
+	}
+	else
+	{
+		*result = bh;
+		(*result)->next = ft_sortedmerge_t(fh, bh->next, c);
+	}
 }

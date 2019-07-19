@@ -41,6 +41,7 @@ typedef	struct			s_mystuff
 	int					filesize;
 	char				date[13];
 	time_t				rawtime;
+	time_t				rawtimen;
 	struct s_mystuff	*next;
 }						t_mything;
 
@@ -84,6 +85,12 @@ t_mything				*ft_sortedmerge_t(t_mything *fh,
 						t_mything *bh, unsigned char c);
 void					ft_printdate(t_mything *mylist);
 void					ft_checkspacing(int n);
-void					ft_checkspacing_R(int n);
+void					ft_checkspacing_r(int n);
+void					ft_checknano(unsigned char c, t_mything *fh,
+						t_mything *bh, t_mything **result);
+void					ft_putdir(char *str);
+void					ft_checkflags(unsigned char *c, int *ptri
+						,int x, char **argv);
+
 
 #endif

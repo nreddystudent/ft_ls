@@ -29,89 +29,37 @@ t_mything	*ft_listcreate(t_mything **myarray, struct dirent *ptrf, char *path,
 	}
 }
 
-void		ft_printlist(t_mything *mylist, unsigned char c,
-						t_tots total, char *path)
+t_mything	*ft_listnew(char *content, char *path, t_tots *total)
 {
-	t_mything	*temp;
+	t_mything	*listn;
 
-	temp = mylist;
-	if (c & FLAG_L)
-	{
-		ft_putstr("total ");
-		ft_putnbr(total.total);
-		ft_putchar('\n');
-	}
+	listn = NULL;
+	if (!(listn = (t_mything *)malloc(sizeof(t_mything))))
+		return (NULL);
+	if (!(listn->d_name = ft_strdup(content)))
+		return (NULL);
+	listn->next = NULL;
+	ft_add_elements(listn, path, total);
+	return (listn);
+}
+
+void		ft_listadd(t_mything **list, t_mything *new)
+{
+	new->next = *list;
+	*list = new;
+}
+
+void		ft_listdel(t_mything *mylist)
+{
+	t_mything *head;
+
 	while (mylist != NULL)
 	{
-		if (c & FLAG_L)
-			ft_printlong(mylist);
-		ft_putstr(mylist->d_name);
-		if (mylist->permission[0] == 'l' && c & FLAG_L)
-			ft_printlink(path, mylist);
-		if (c & FLAG_L)
-			ft_putstr("   \n");
-		else if (c & FLAG_R)
-			ft_checkspacing_R(ft_strlen(mylist->d_name));
-		else
-			ft_putstr("   ");
+		head = mylist;
 		mylist = mylist->next;
+		free(head->d_name);
+		free(head->group);
+		free(head->user);
+		free(head);
 	}
-	ft_putchar('\n');
-	if (c & FLAG_R)
-		ft_putchar('\n');
-}
-
-int			ft_is_dir(const char *pname)
-{
-	struct stat s;
-
-	stat(pname, &s);
-	return (S_ISDIR(s.st_mode));
-}
-
-void		ft_read(char *path, unsigned char c)
-{
-	DIR				*file;
-	struct dirent	*ptr;
-	t_mything		*ptrarray[2];
-	t_tots			total;
-
-	ft_setarray(ptrarray, &total);
-	file = opendir(path);
-	if (file == NULL)
-	{
-		ft_putstr(strerror(errno));
-		ft_putchar('\n');
-		return ;
-	}
-	while ((ptr = readdir(file)))
-	{
-		if (!(c & FLAG_A) && (ptr->d_name[0] == '.'))
-			continue ;
-		ptrarray[0] = ft_listcreate(ptrarray, ptr, path, &total);
-	}
-	closedir(file);
-	ft_sortlist(&(ptrarray[0]), c);
-	ft_printlist(ptrarray[0], c, total, path);
-	if (c & FLAG_R)
-		ft_readr(path, c, ptrarray[0], total);
-	ft_listdel(ptrarray[0]);
-}
-
-void		ft_ls(int argc, char **argv, unsigned char c, int i)
-{
-	(void)argc;
-	if (c & FLAG_MF)
-	{
-		i = 0;
-		while (argv[i] != NULL)
-		{
-			ft_putstr(argv[i]);
-			ft_putendl(" :");
-			ft_read(argv[i], c);
-			i += 1;
-		}
-	}
-	else
-		ft_read(argv[i], c);
 }

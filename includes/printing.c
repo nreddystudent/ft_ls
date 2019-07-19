@@ -6,30 +6,12 @@
 /*   By: nreddy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 17:14:36 by nreddy            #+#    #+#             */
-/*   Updated: 2019/07/11 17:14:38 by nreddy           ###   ########.fr       */
+/*   Updated: 2019/07/19 09:00:37 by nreddy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "../ft_ls.h"
-
-void	ft_checkspacing(int n)
-{
-	int i;
-
-	i = 0;
-	while (n > 9)
-	{
-		n = n / 10;
-		i++;
-	}
-	if (i < 8)
-		i = 8 - i;
-	else
-		i = i - 8;
-	while (i-- > 0)
-		ft_putchar(' ');
-}
 
 void	ft_printlong(t_mything *mylist)
 {
@@ -47,33 +29,69 @@ void	ft_printlong(t_mything *mylist)
 	ft_putchar(' ');
 }
 
-void	ft_getlisi(t_mything *mylist, struct stat statisics, t_tots *total)
+void	ft_printlist(t_mything *mylist, unsigned char c,
+						t_tots total, char *path)
 {
-	mylist->nlink = statisics.st_nlink;
-	mylist->filesize = statisics.st_size;
-	total->total += statisics.st_blocks;
+	if (c & FLAG_L)
+	{
+		ft_putstr("total ");
+		ft_putnbr(total.total);
+		ft_putchar('\n');
+	}
+	while (mylist != NULL)
+	{
+		if (c & FLAG_L)
+			ft_printlong(mylist);
+		ft_putstr(mylist->d_name);
+		if (mylist->permission[0] == 'l' && c & FLAG_L)
+			ft_printlink(path, mylist);
+		if (c & FLAG_L)
+			ft_putstr("   \n");
+		else if (c & FLAG_R)
+			ft_checkspacing_r(ft_strlen(mylist->d_name));
+		else
+			ft_putstr("   ");
+		mylist = mylist->next;
+	}
+	ft_putchar('\n');
+	if (c & FLAG_R)
+		ft_putchar('\n');
 }
 
-int		ft_islink(const char *pname)
+void	ft_printlink(char *path, t_mything *mylist)
 {
-	struct stat s;
+	char		linkpath[MAXPATHLEN + 1];
+	char		*pathtemp;
+	char		*fullpath;
 
-	lstat(pname, &s);
-	return (S_ISLNK(s.st_mode));
+	pathtemp = ft_strjoin(path, "/");
+	fullpath = ft_strjoin(pathtemp, mylist->d_name);
+	ft_bzero(linkpath, MAXPATHLEN);
+	readlink(fullpath, linkpath, MAXPATHLEN);
+	ft_putstr(" -> ");
+	ft_putstr(linkpath);
+	free(pathtemp);
+	free(fullpath);
 }
 
-void	ft_gettime(t_mything *mylist, struct stat statistics)
+void	ft_printdate(t_mything *mylist)
 {
-	char		*date;
-	int			i;
-	int			x;
+	char	*str;
+	char	*times;
 
-	i = 4;
-	x = 0;
-	date = ft_strdup(ctime(&statistics.st_mtime));
-	while (i < 16)
-		mylist->date[x++] = date[i++];
-	mylist->date[12] = '\0';
-	mylist->rawtime = statistics.st_mtime;
-	free(date);
+	str = mylist->date + 3;
+	str[3] = '\0';
+	ft_putstr(str);
+	ft_putchar(' ');
+	mylist->date[3] = '\0';
+	ft_putstr(mylist->date);
+	ft_putchar(' ');
+	times = mylist->date + 7;
+	ft_putstr(times);
+}
+
+void	ft_putdir(char *str)
+{
+	ft_putstr(str);
+	ft_putstr(":\n");
 }
