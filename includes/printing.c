@@ -46,7 +46,7 @@ void	ft_printlist(t_mything *mylist, unsigned char c,
 		if (mylist->permission[0] == 'l' && c & FLAG_L)
 			ft_printlink(path, mylist);
 		if (c & FLAG_L)
-			ft_putstr("   \n");
+			ft_putchar('\n');
 		else if (c & FLAG_R)
 			ft_checkspacing_r(ft_strlen(mylist->d_name));
 		else
@@ -54,7 +54,7 @@ void	ft_printlist(t_mything *mylist, unsigned char c,
 		mylist = mylist->next;
 	}
 	ft_putchar('\n');
-	if (c & FLAG_R)
+	if (c & FLAG_R && !(c & FLAG_L))
 		ft_putchar('\n');
 }
 
