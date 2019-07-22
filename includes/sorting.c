@@ -13,7 +13,7 @@
 #include "../libft/libft.h"
 #include "../ft_ls.h"
 
-void		ft_sortlist(t_mything **headref, unsigned char c)
+void		ft_sortlist(t_mything **headref, int c)
 {
 	t_mything	*head;
 	t_mything	*fh;
@@ -52,7 +52,7 @@ void		frontbacksplit(t_mything *head, t_mything **fh, t_mything **bh)
 	slow->next = NULL;
 }
 
-t_mything	*ft_sortedmerge(t_mything *fh, t_mything *bh, unsigned char c)
+t_mything	*ft_sortedmerge(t_mything *fh, t_mything *bh, int c)
 {
 	t_mything *result;
 
@@ -79,7 +79,7 @@ t_mything	*ft_sortedmerge(t_mything *fh, t_mything *bh, unsigned char c)
 	return (result);
 }
 
-t_mything	*ft_sortedmerge_t(t_mything *fh, t_mything *bh, unsigned char c)
+t_mything	*ft_sortedmerge_t(t_mything *fh, t_mything *bh, int c)
 {
 	t_mything *result;
 
@@ -108,7 +108,7 @@ t_mything	*ft_sortedmerge_t(t_mything *fh, t_mything *bh, unsigned char c)
 	return (result);
 }
 
-void		ft_checknano(unsigned char c, t_mything *fh, t_mything *bh,
+void		ft_checknano(int c, t_mything *fh, t_mything *bh,
 					t_mything **result)
 {
 	if (!(FLAG_REV & c) && (fh->rawtimen > bh->rawtimen))

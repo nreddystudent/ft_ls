@@ -30,6 +30,7 @@
 # define FLAG_T 32
 # define FLAG_MF 64
 # define MAXPATHLEN 1024
+# define FLAG_AL 128
 
 typedef	struct			s_mystuff
 {
@@ -55,18 +56,18 @@ t_mything				*ft_listnew(char *content, char *path, t_tots *total);
 int						ft_is_dir(const char *pname);
 t_mything				*ft_listcreate(t_mything **myarray, struct dirent *ptrf,
 						char *path, t_tots *total);
-void					ft_printlist(t_mything *mylist, unsigned char c,
+void					ft_printlist(t_mything *mylist, int c,
 						t_tots total, char *path);
-void					ft_ls(int argc, char **argv, unsigned char c, int i);
-void					ft_read(char *path, unsigned char c);
+void					ft_ls(int argc, char **argv, int c, int i);
+void					ft_read(char *path, int c);
 void					ft_listadd(t_mything **list, t_mything *new);
-void					ft_sortlist(t_mything **headref, unsigned char c);
+void					ft_sortlist(t_mything **headref, int c);
 void					frontbacksplit(t_mything *head,
 						t_mything **fh, t_mything **bh);
 t_mything				*ft_sortedmerge(t_mything *fh,
-						t_mything *bh, unsigned char c);
+						t_mything *bh, int c);
 void					ft_readr(char *path,
-						unsigned char c, t_mything *mylist, t_tots total);
+						int c, t_mything *mylist, t_tots total);
 void					ft_listdel(t_mything *mylist);
 void					ft_add_elements(t_mything *mylist, char *path,
 						t_tots *total);
@@ -82,15 +83,15 @@ t_mything				**ft_setarray(t_mything **ptrarray, t_tots *total);
 t_mything				**ft_setarray(t_mything **ptrarray, t_tots *total);
 void					ft_printlink(char *path, t_mything *mylist);
 t_mything				*ft_sortedmerge_t(t_mything *fh,
-						t_mything *bh, unsigned char c);
+						t_mything *bh, int c);
 void					ft_printdate(t_mything *mylist);
 void					ft_checkspacing(int n);
 void					ft_checkspacing_r(int n);
-void					ft_checknano(unsigned char c, t_mything *fh,
+void					ft_checknano(int c, t_mything *fh,
 						t_mything *bh, t_mything **result);
 void					ft_putdir(char *str);
-void					ft_checkflags(unsigned char *c, int *ptri
+void					ft_checkflags(int *c, int *ptri
 						,int x, char **argv);
-
+int						ft_checkextra(char *filename, int c);
 
 #endif

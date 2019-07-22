@@ -13,7 +13,7 @@
 #include "ft_ls.h"
 #include "libft/libft.h"
 
-int			ft_check_args(char **argv, int *ptri, unsigned char *c, int argc)
+int			ft_check_args(char **argv, int *ptri, int *c, int argc)
 {
 	int		x;
 
@@ -72,7 +72,7 @@ void		ft_multifile(char **multif, int argc, int i, char **argv)
 int			main(int argc, char **argv)
 {
 	int				i;
-	unsigned char	c;
+	int	c;
 	char			*multif[argc];
 
 	i = 0;
@@ -96,7 +96,7 @@ int			main(int argc, char **argv)
 	return (0);
 }
 
-void		ft_ls(int argc, char **argv, unsigned char c, int i)
+void		ft_ls(int argc, char **argv, int c, int i)
 {
 	(void)argc;
 	if (c & FLAG_MF)

@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reading.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nreddy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/22 10:25:03 by nreddy            #+#    #+#             */
+/*   Updated: 2019/07/22 10:25:04 by nreddy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../ft_ls.h"
 #include "../libft/libft.h"
 
-void		ft_read(char *path, unsigned char c)
+void		ft_read(char *path, int c)
 {
 	DIR				*file;
 	struct dirent	*ptr;
@@ -18,7 +30,7 @@ void		ft_read(char *path, unsigned char c)
 	}
 	while ((ptr = readdir(file)))
 	{
-		if (!(c & FLAG_A) && (ptr->d_name[0] == '.'))
+		if (ft_checkextra(ptr->d_name, c) == 1)
 			continue ;
 		ptrarray[0] = ft_listcreate(ptrarray, ptr, path, &total);
 	}
@@ -30,7 +42,7 @@ void		ft_read(char *path, unsigned char c)
 	ft_listdel(ptrarray[0]);
 }
 
-void	ft_readr(char *path, unsigned char c,
+void		ft_readr(char *path, int c,
 		t_mything *mylist, t_tots total)
 {
 	char	*str1;
