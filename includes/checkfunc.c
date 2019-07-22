@@ -71,17 +71,6 @@ void		ft_checkflags(int *c, int *ptri, int x, char **argv)
 		*c += FLAG_T;
 	else if (argv[*ptri][x] == 'A' && !(*c & FLAG_AL))
 		*c += FLAG_AL;
-}
-
-int		ft_checkextra(char *filename, int c)
-{
-	if (!(c & FLAG_A) && (filename[0] == '.') && (!(c & FLAG_AL)))
-			return (1);
-		if (c & FLAG_AL && !(c & FLAG_A))
-		{
-			if ((ft_strcmp(".", filename) == 0)
-			|| (ft_strcmp ("..", filename) == 0))
-				return (1);
-		}
-	return(0);
+	else if (argv[*ptri][x] == 'G' && !(*c & FLAG_AL))
+		*c += FLAG_G;
 }

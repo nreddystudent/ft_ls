@@ -42,7 +42,10 @@ void	ft_printlist(t_mything *mylist, int c,
 	{
 		if (c & FLAG_L)
 			ft_printlong(mylist);
-		ft_putstr(mylist->d_name);
+		if (c & FLAG_G)
+			ft_putcolour(mylist);
+		else
+			ft_putstr(mylist->d_name);
 		if (mylist->permission[0] == 'l' && c & FLAG_L)
 			ft_printlink(path, mylist);
 		if (c & FLAG_L)

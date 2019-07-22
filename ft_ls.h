@@ -23,14 +23,15 @@
 # include <sys/xattr.h>
 # include <string.h>
 # include <errno.h>
-# define FLAG_A 1
-# define FLAG_L 2
-# define FLAG_REV 4
-# define FLAG_R 8
-# define FLAG_T 32
-# define FLAG_MF 64
+# define FLAG_A		1
+# define FLAG_L		2
+# define FLAG_REV	4
+# define FLAG_R		8
+# define FLAG_T		32
+# define FLAG_MF	64
 # define MAXPATHLEN 1024
-# define FLAG_AL 128
+# define FLAG_AL	128
+# define FLAG_G		256
 
 typedef	struct			s_mystuff
 {
@@ -93,5 +94,6 @@ void					ft_putdir(char *str);
 void					ft_checkflags(int *c, int *ptri
 						,int x, char **argv);
 int						ft_checkextra(char *filename, int c);
+void					ft_putcolour(t_mything *mylist);
 
 #endif
