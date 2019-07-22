@@ -56,10 +56,11 @@ typedef struct			s_tots
 }						t_tots;
 
 void					ft_recursion(char *argv, struct dirent *ptrf);
-t_mything				*ft_listnew(char *content, char *path, t_tots *total);
+t_mything				*ft_listnew(char *content, char *path, t_tots *total
+						,int c);
 int						ft_is_dir(const char *pname);
 t_mything				*ft_listcreate(t_mything **myarray, struct dirent *ptrf,
-						char *path, t_tots *total);
+						char *path, t_tots *total, int c);
 void					ft_printlist(t_mything *mylist, int c,
 						t_tots total, char *path);
 void					ft_ls(int argc, char **argv, int c, int i);
@@ -74,8 +75,9 @@ void					ft_readr(char *path,
 						int c, t_mything *mylist, t_tots total);
 void					ft_listdel(t_mything *mylist);
 void					ft_add_elements(t_mything *mylist, char *path,
-						t_tots *total);
-void					ft_get_names(t_mything *mylist, struct stat statistics);
+						t_tots *total, int c);
+void					ft_get_names(t_mything *mylist, struct stat statistics
+						,int c);
 void					ft_get_fileperm(t_mything *mylist,
 						struct stat statistics, char *path);
 void					ft_printlong(t_mything *mylist);

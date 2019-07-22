@@ -24,15 +24,17 @@ void		ft_read(char *path, int c)
 	file = opendir(path);
 	if (file == NULL)
 	{
-		ft_putstr(strerror(errno));
-		ft_putchar('\n');
+		if (errno == 20)
+			ft_putendl(path);
+		else
+			perror(strerror(errno));
 		return ;
 	}
 	while ((ptr = readdir(file)))
 	{
 		if (ft_checkextra(ptr->d_name, c) == 1)
 			continue ;
-		ptrarray[0] = ft_listcreate(ptrarray, ptr, path, &total);
+		ptrarray[0] = ft_listcreate(ptrarray, ptr, path, &total, c);
 	}
 	closedir(file);
 	if (!(c & FLAG_F))

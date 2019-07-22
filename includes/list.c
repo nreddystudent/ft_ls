@@ -14,22 +14,22 @@
 #include "../ft_ls.h"
 
 t_mything	*ft_listcreate(t_mything **myarray, struct dirent *ptrf, char *path,
-			t_tots *total)
+			t_tots *total, int c)
 {
 	if (myarray[0] == NULL)
 	{
-		myarray[0] = ft_listnew(ptrf->d_name, path, total);
+		myarray[0] = ft_listnew(ptrf->d_name, path, total, c);
 		return (myarray[0]);
 	}
 	else
 	{
-		myarray[1] = ft_listnew(ptrf->d_name, path, total);
+		myarray[1] = ft_listnew(ptrf->d_name, path, total, c);
 		ft_listadd(&myarray[0], myarray[1]);
 		return (myarray[0]);
 	}
 }
 
-t_mything	*ft_listnew(char *content, char *path, t_tots *total)
+t_mything	*ft_listnew(char *content, char *path, t_tots *total, int c)
 {
 	t_mything	*listn;
 
@@ -39,7 +39,7 @@ t_mything	*ft_listnew(char *content, char *path, t_tots *total)
 	if (!(listn->d_name = ft_strdup(content)))
 		return (NULL);
 	listn->next = NULL;
-	ft_add_elements(listn, path, total);
+	ft_add_elements(listn, path, total, c);
 	return (listn);
 }
 

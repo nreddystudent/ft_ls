@@ -13,7 +13,7 @@
 #include "../libft/libft.h"
 #include "../ft_ls.h"
 
-void	ft_add_elements(t_mything *mylist, char *path, t_tots *total)
+void	ft_add_elements(t_mything *mylist, char *path, t_tots *total, int c)
 {
 	struct stat	statistics;
 	char		*temp;
@@ -29,7 +29,7 @@ void	ft_add_elements(t_mything *mylist, char *path, t_tots *total)
 		stat(rpath, &statistics);
 	ft_get_fileperm(mylist, statistics, rpath);
 	ft_getlisi(mylist, statistics, total);
-	ft_get_names(mylist, statistics);
+	ft_get_names(mylist, statistics, c);
 	ft_gettime(mylist, statistics);
 	free(temp);
 	free(rpath);
@@ -59,7 +59,7 @@ void	ft_getlisi(t_mything *mylist, struct stat statisics, t_tots *total)
 	total->total += statisics.st_blocks;
 }
 
-void	ft_get_names(t_mything *mylist, struct stat statistics)
+void	ft_get_names(t_mything *mylist, struct stat statistics, int c)
 {
 	struct group	*gruid;
 	struct passwd	*uid;
@@ -68,13 +68,13 @@ void	ft_get_names(t_mything *mylist, struct stat statistics)
 	uid = NULL;
 	mylist->user = NULL;
 	mylist->group = NULL;
-	if (!(uid = getpwuid(statistics.st_uid)))
+	if (!(uid = getpwuid(statistics.st_uid)) || c & FLAG_N)
 		mylist->user = ft_itoa(statistics.st_uid);
-	if (!(gruid = getgrgid(statistics.st_gid)))
+	if (!(gruid = getgrgid(statistics.st_gid)) || c & FLAG_N)
 		mylist->group = ft_itoa(statistics.st_gid);
-	if (!(mylist->group))
+	if (!(mylist->group) && !(c & FLAG_N))
 		mylist->group = ft_strdup(gruid->gr_name);
-	if (!(mylist->user))
+	if (!(mylist->user) && !(c & FLAG_N))
 		mylist->user = ft_strdup(uid->pw_name);
 }
 
