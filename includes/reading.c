@@ -35,7 +35,8 @@ void		ft_read(char *path, int c)
 		ptrarray[0] = ft_listcreate(ptrarray, ptr, path, &total);
 	}
 	closedir(file);
-	ft_sortlist(&(ptrarray[0]), c);
+	if (!(c & FLAG_F))
+		ft_sortlist(&(ptrarray[0]), c);
 	ft_printlist(ptrarray[0], c, total, path);
 	if (c & FLAG_R)
 		ft_readr(path, c, ptrarray[0], total);

@@ -42,8 +42,8 @@ void	ft_printlist(t_mything *mylist, int c,
 	{
 		if (c & FLAG_L)
 			ft_printlong(mylist);
-		if (c & FLAG_G)
-			ft_putcolour(mylist);
+		if ((c & FLAG_G) || (c & FLAG_P))
+			ft_putextra(mylist, c);
 		else
 			ft_putstr(mylist->d_name);
 		if (mylist->permission[0] == 'l' && c & FLAG_L)

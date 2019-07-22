@@ -45,8 +45,17 @@ t_mything	*ft_listnew(char *content, char *path, t_tots *total)
 
 void		ft_listadd(t_mything **list, t_mything *new)
 {
-	new->next = *list;
-	*list = new;
+	t_mything	*tail;
+
+	tail = *list;
+	if (*list == NULL)
+		(*list)->next = new;
+	else
+	{
+		while (tail->next != NULL)
+			tail = tail->next;
+		tail->next = new;
+	}
 }
 
 void		ft_listdel(t_mything *mylist)
