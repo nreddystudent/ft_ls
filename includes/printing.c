@@ -34,6 +34,7 @@ void	ft_printlist(t_mything *mylist, unsigned char c,
 {
 	if (c & FLAG_L)
 	{
+		ft_putendl("i am here :");
 		ft_putstr("total ");
 		ft_putnbr(total.total);
 		ft_putchar('\n');

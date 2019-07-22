@@ -36,6 +36,7 @@ void	ft_readr(char *path, unsigned char c,
 	char	*str1;
 	char	*str2;
 
+	(void)total;
 	while (mylist != NULL)
 	{
 		str1 = ft_strjoin("/", mylist->d_name);
@@ -52,7 +53,6 @@ void	ft_readr(char *path, unsigned char c,
 		if ((ft_is_dir(str2) == 1))
 		{
 			ft_putdir(str2);
-			ft_printlist(mylist, c, total, path);
 			ft_read(str2, c);
 		}
 		free(str2);
