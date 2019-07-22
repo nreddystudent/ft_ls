@@ -41,7 +41,7 @@ typedef	struct			s_mystuff
 	char				*d_name;
 	char				*user;
 	char				*group;
-	char				permission[11];
+	char				permission[12];
 	int					nlink;
 	int					filesize;
 	char				date[13];

@@ -43,12 +43,18 @@ void	ft_get_fileperm(t_mything *mylist, struct stat statistics, char *path)
 	mylist->permission[1] = statistics.st_mode & S_IRUSR ? 'r' : '-';
 	mylist->permission[2] = statistics.st_mode & S_IWUSR ? 'w' : '-';
 	mylist->permission[3] = statistics.st_mode & S_IXUSR ? 'x' : '-';
+	if (statistics.st_mode & S_ISUID)
+		mylist->permission[3] = 's';
 	mylist->permission[4] = statistics.st_mode & S_IRGRP ? 'r' : '-';
 	mylist->permission[5] = statistics.st_mode & S_IWGRP ? 'w' : '-';
 	mylist->permission[6] = statistics.st_mode & S_IXGRP ? 'x' : '-';
+	if (statistics.st_mode & S_ISGID)
+		mylist->permission[6] = 's';
 	mylist->permission[7] = statistics.st_mode & S_IROTH ? 'r' : '-';
 	mylist->permission[8] = statistics.st_mode & S_IWOTH ? 'w' : '-';
 	mylist->permission[9] = statistics.st_mode & S_IXOTH ? 'x' : '-';
+	if (statistics.st_mode & S_ISVTX)
+		mylist->permission[9] = 't';
 	mylist->permission[10] = '\0';
 }
 
