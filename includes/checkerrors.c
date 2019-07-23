@@ -33,19 +33,28 @@ void	checkrecursion(char *path, int c, t_mything **ptrarray)
 		ft_readr(path, c, ptrarray[0]);
 }
 
-void	checkfiles(char **argv, int *i)
+void	checkfiles(char **argv, int c)
 {
-	while (argv[*i] != NULL)
+	int i;
+
+	i = 0;
+	while (argv[i] != NULL)
 	{
-		opendir(argv[*i]);
+		opendir(argv[i]);
 		if (errno == 20)
 		{
 			errno = 0;
-			ft_putstr(argv[*i++]);
+			if (c & FLAG_L)
+			{
+				ft_print_long_file(argv[i++], c);
+				continue ;
+			}
+			else
+				ft_putstr(argv[i++]);
 			ft_putstr("   ");
 			continue ;
 		}
-		*i += 1;
+			i += 1;
 	}
 }
 
@@ -55,4 +64,18 @@ void	checkillegalflag(char **argv, int *ptri, int x)
 	ft_putchar(argv[*ptri][x]);
 	ft_putstr("\nusage: ls [-AGRaflnpt] [file ...]\n");
 	exit(0);
+}
+
+void	ft_print_long_file(char *file, int flags)
+{
+	t_mything *filedetail;
+
+	t_tots filenum;
+
+	filenum.flags = flags;
+	filedetail = ft_listnew(file, "./" , &filenum);
+	ft_printlong(filedetail);
+	ft_putstr(" ");
+	ft_putendl(file);
+	ft_listdel(filedetail);
 }

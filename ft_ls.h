@@ -78,13 +78,14 @@ void					ft_add_elements(t_mything *mylist, char *path,
 						t_tots *total, int c);
 void					ft_get_names(t_mything *mylist, struct stat statistics
 						, int c);
-void					ft_get_fileperm(t_mything *mylist,
+void					ft_get_fileperm(char *permissions,
 						struct stat statistics, char *path);
 void					ft_printlong(t_mything *mylist);
 void					ft_getlisi(t_mything *mylist, struct stat statisics,
 						t_tots *total);
 int						ft_islink(const char *pname);
-void					ft_gettime(t_mything *mylist, struct stat statistics);
+void					ft_gettime(char *datem, struct stat statistics
+						,int rawtime, int rawtimen);
 t_mything				**ft_setarray(t_mything **ptrarray, t_tots *total);
 t_mything				**ft_setarray(t_mything **ptrarray, t_tots *total);
 void					ft_printlink(char *path, t_mything *mylist);
@@ -103,12 +104,12 @@ void					ft_putextra(t_mything *mylist, int c);
 void					checkerrors(char *path);
 void					printtotal(t_tots total);
 void					checkrecursion(char *path, int c, t_mything **ptrarray);
-void					read_mf(char **argv, int c);
-void					checkfiles(char **argv, int *i);
+void					read_mf(char **argv, int c, int i);
+void					checkfiles(char **argv, int c);
 void					checkascii(int c, t_mything *fh, t_mything *bh
 						, t_mything **result);
 void					checkascii_t(int c, t_mything *fh, t_mything *bh
 						, t_mything **result);
 void					checkillegalflag(char **argv, int *i, int x);
-
+void					ft_print_long_file(char *file, int flags);
 #endif

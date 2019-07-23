@@ -102,7 +102,7 @@ void		ft_ls(int argc, char **argv, int c, int i)
 {
 	(void)argc;
 	if (c & FLAG_MF)
-		read_mf(argv, c);
+		read_mf(argv, c, i);
 	else
 		ft_read(argv[i], c);
 }

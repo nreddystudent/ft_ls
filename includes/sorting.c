@@ -108,10 +108,7 @@ void		ft_checknano(int c, t_mything *fh, t_mything *bh,
 		(*result)->next = ft_sortedmerge_t(fh->next, bh, c);
 	}
 	else if (fh->rawtimen == bh->rawtimen)
-	{
-		ft_putendl("c");
 		checkascii_t(c, fh, bh, result);
-	}
 	else
 	{
 		*result = bh;

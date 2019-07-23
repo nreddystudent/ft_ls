@@ -25,8 +25,16 @@ void		ft_read(char *path, int c)
 	total.flags = c;
 	if (file == NULL)
 	{
-		checkerrors(path);
-		return ;
+		if (errno == 20)
+		{
+			checkfiles(&path, c);
+			return ;
+		}
+		else
+		{
+			checkerrors(path);
+			return ;
+		}
 	}
 	while ((ptr = readdir(file)))
 	{
@@ -71,14 +79,11 @@ void		ft_readr(char *path, int c,
 	}
 }
 
-void		read_mf(char **argv, int c)
+void		read_mf(char **argv, int c, int i)
 {
-	int i;
-
 	i = 0;
-	checkfiles(argv, &i);
+	checkfiles(argv, c);
 	ft_putendl("\n");
-	i = 0;
 	while (argv[i] != NULL)
 	{
 		if (opendir(argv[i]))
