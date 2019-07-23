@@ -22,36 +22,32 @@ void		ft_read(char *path, int c)
 
 	ft_setarray(ptrarray, &total);
 	file = opendir(path);
+	total.flags = c;
 	if (file == NULL)
 	{
-		if (errno == 20)
-			ft_putendl(path);
-		else
-			perror(strerror(errno));
+		checkerrors(path);
 		return ;
 	}
 	while ((ptr = readdir(file)))
 	{
 		if (ft_checkextra(ptr->d_name, c) == 1)
 			continue ;
-		ptrarray[0] = ft_listcreate(ptrarray, ptr, path, &total, c);
+		ptrarray[0] = ft_listcreate(ptrarray, ptr, path, &total);
 	}
 	closedir(file);
 	if (!(c & FLAG_F))
 		ft_sortlist(&(ptrarray[0]), c);
 	ft_printlist(ptrarray[0], c, total, path);
-	if (c & FLAG_R)
-		ft_readr(path, c, ptrarray[0], total);
+	checkrecursion(path, c, ptrarray);
 	ft_listdel(ptrarray[0]);
 }
 
 void		ft_readr(char *path, int c,
-		t_mything *mylist, t_tots total)
+		t_mything *mylist)
 {
 	char	*str1;
 	char	*str2;
 
-	(void)total;
 	while (mylist != NULL)
 	{
 		str1 = ft_strjoin("/", mylist->d_name);
@@ -72,5 +68,31 @@ void		ft_readr(char *path, int c,
 		}
 		free(str2);
 		mylist = mylist->next;
+	}
+}
+
+void		read_mf(char **argv, int c)
+{
+	int i;
+
+	i = 0;
+	checkfiles(argv, &i);
+	ft_putendl("\n");
+	i = 0;
+	while (argv[i] != NULL)
+	{
+		if (opendir(argv[i]))
+		{
+			ft_putstr(argv[i]);
+			ft_putendl(" :");
+		}
+		if (errno == 20)
+		{
+			errno = 0;
+			i++;
+			continue ;
+		}
+		ft_read(argv[i++], c);
+		ft_putchar('\n');
 	}
 }

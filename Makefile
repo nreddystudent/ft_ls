@@ -1,4 +1,5 @@
-SRC=includes/list.c includes/checkfunc.c includes/setelements.c includes/printing.c includes/setting.c includes/sorting.c includes/reading.c includes/bonusfunc.c
+SRC=includes/list.c includes/checkfunc.c includes/setelements.c includes/printing.c includes/setting.c includes/sorting.c includes/reading.c includes/bonusfunc.c includes/checkerrors.c includes/printing2.c\
+includes/sorting2.c
 NAME=ft_ls
 RED=\033[0;31m
 LBLUE=\033[1;34m

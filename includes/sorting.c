@@ -61,21 +61,7 @@ t_mything	*ft_sortedmerge(t_mything *fh, t_mything *bh, int c)
 		return (bh);
 	else if (bh == NULL)
 		return (fh);
-	if (!(c & FLAG_REV) && (ft_strcmp(fh->d_name, bh->d_name)) < 0)
-	{
-		result = fh;
-		result->next = ft_sortedmerge(fh->next, bh, c);
-	}
-	else if ((c & FLAG_REV) && (ft_strcmp(fh->d_name, bh->d_name)) > 0)
-	{
-		result = fh;
-		result->next = ft_sortedmerge(fh->next, bh, c);
-	}
-	else
-	{
-		result = bh;
-		result->next = ft_sortedmerge(fh, bh->next, c);
-	}
+	checkascii(c, fh, bh, &result);
 	return (result);
 }
 
@@ -120,6 +106,11 @@ void		ft_checknano(int c, t_mything *fh, t_mything *bh,
 	{
 		*result = fh;
 		(*result)->next = ft_sortedmerge_t(fh->next, bh, c);
+	}
+	else if (fh->rawtimen == bh->rawtimen)
+	{
+		ft_putendl("c");
+		checkascii_t(c, fh, bh, result);
 	}
 	else
 	{

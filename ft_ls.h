@@ -53,14 +53,14 @@ typedef	struct			s_mystuff
 typedef struct			s_tots
 {
 	int					total;
+	int					flags;
 }						t_tots;
 
 void					ft_recursion(char *argv, struct dirent *ptrf);
-t_mything				*ft_listnew(char *content, char *path, t_tots *total
-						,int c);
+t_mything				*ft_listnew(char *content, char *path, t_tots *total);
 int						ft_is_dir(const char *pname);
 t_mything				*ft_listcreate(t_mything **myarray, struct dirent *ptrf,
-						char *path, t_tots *total, int c);
+						char *path, t_tots *total);
 void					ft_printlist(t_mything *mylist, int c,
 						t_tots total, char *path);
 void					ft_ls(int argc, char **argv, int c, int i);
@@ -72,7 +72,7 @@ void					frontbacksplit(t_mything *head,
 t_mything				*ft_sortedmerge(t_mything *fh,
 						t_mything *bh, int c);
 void					ft_readr(char *path,
-						int c, t_mything *mylist, t_tots total);
+						int c, t_mything *mylist);
 void					ft_listdel(t_mything *mylist);
 void					ft_add_elements(t_mything *mylist, char *path,
 						t_tots *total, int c);
@@ -100,5 +100,14 @@ void					ft_checkflags(int *c, int *ptri
 						,int x, char **argv);
 int						ft_checkextra(char *filename, int c);
 void					ft_putextra(t_mything *mylist, int c);
+void					checkerrors(char *path);
+void					printtotal(t_tots total);
+void					checkrecursion(char *path, int c, t_mything **ptrarray);
+void					read_mf(char **argv, int c);
+void					checkfiles(char **argv, int *i);
+void					checkascii(int c, t_mything *fh, t_mything *bh
+						, t_mything **result);
+void					checkascii_t(int c, t_mything *fh, t_mything *bh
+						, t_mything **result);
 
 #endif

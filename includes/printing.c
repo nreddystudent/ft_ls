@@ -33,11 +33,7 @@ void	ft_printlist(t_mything *mylist, int c,
 						t_tots total, char *path)
 {
 	if (c & FLAG_L)
-	{
-		ft_putstr("total ");
-		ft_putnbr(total.total);
-		ft_putchar('\n');
-	}
+		printtotal(total);
 	while (mylist != NULL)
 	{
 		if (c & FLAG_L)

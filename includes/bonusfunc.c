@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bonusfunc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nreddy <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/23 08:37:42 by nreddy            #+#    #+#             */
+/*   Updated: 2019/07/23 08:37:43 by nreddy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "../ft_ls.h"
@@ -5,14 +16,14 @@
 int		ft_checkextra(char *filename, int c)
 {
 	if (!(c & FLAG_A) && (filename[0] == '.') && (!(c & FLAG_AL)))
+		return (1);
+	if (c & FLAG_AL && !(c & FLAG_A))
+	{
+		if ((ft_strcmp(".", filename) == 0)
+		|| (ft_strcmp("..", filename) == 0))
 			return (1);
-		if (c & FLAG_AL && !(c & FLAG_A))
-		{
-			if ((ft_strcmp(".", filename) == 0)
-			|| (ft_strcmp ("..", filename) == 0))
-				return (1);
-		}
-	return(0);
+	}
+	return (0);
 }
 
 void	ft_putextra(t_mything *mylist, int c)

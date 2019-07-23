@@ -100,40 +100,7 @@ void		ft_ls(int argc, char **argv, int c, int i)
 {
 	(void)argc;
 	if (c & FLAG_MF)
-	{
-		i = 0;
-		while (argv[i] != NULL)
-		{
-			opendir(argv[i]);
-			if (errno == 20)
-			{
-				errno = 0;
-				ft_putstr(argv[i++]);
-				ft_putstr("   ");
-				continue ;
-			}
-			i += 1;
-		}
-		ft_putendl("\n");
-		i = 0;
-		while (argv[i] != NULL)
-		{
-			if (opendir(argv[i]))
-			{
-				ft_putstr(argv[i]);
-				ft_putendl(" :");
-			}
-			if (errno == 20)
-			{
-				errno = 0;
-				i++;
-				continue ;
-			}
-			ft_read(argv[i++], c);
-			ft_putchar('\n');
-		}
-	}
+		read_mf(argv, c);
 	else
 		ft_read(argv[i], c);
 }
-
