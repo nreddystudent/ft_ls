@@ -109,5 +109,7 @@ void					checkascii(int c, t_mything *fh, t_mything *bh
 						, t_mything **result);
 void					checkascii_t(int c, t_mything *fh, t_mything *bh
 						, t_mything **result);
+void					checkillegalflag(char **argv, int *i, int x);
+
 
 #endif

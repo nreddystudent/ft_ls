@@ -18,7 +18,12 @@ void	checkerrors(char *path)
 	if (errno == 20)
 		ft_putendl(path);
 	else
+	{
+		ft_putstr("ls : ");
+		ft_putstr(path);
+		ft_putstr(":   ");
 		perror(strerror(errno));
+	}
 	return ;
 }
 
@@ -42,4 +47,12 @@ void	checkfiles(char **argv, int *i)
 		}
 		*i += 1;
 	}
+}
+
+void	checkillegalflag(char **argv, int *ptri, int x)
+{
+	ft_putstr("ls: illegal option -- ");
+	ft_putchar(argv[*ptri][x]);
+	ft_putstr("\nusage: ls [-AGRaflnpt] [file ...]\n");
+	exit(0);
 }

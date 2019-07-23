@@ -79,4 +79,7 @@ void		ft_checkflags(int *c, int *ptri, int x, char **argv)
 		*c += FLAG_F + FLAG_A;
 	else if (argv[*ptri][x] == 'n' && !(*c & FLAG_N))
 		*c += FLAG_N + FLAG_L;
+	else if (((argv[*ptri][x]) == '-' && argv[*ptri][x + 1] == '-'
+	&& argv[*ptri][x + 2] != '\0') || (argv[*ptri][x] != '-'))
+		checkillegalflag(argv, ptri, x);
 }
