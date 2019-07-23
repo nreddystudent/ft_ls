@@ -77,7 +77,7 @@ void					ft_listdel(t_mything *mylist);
 void					ft_add_elements(t_mything *mylist, char *path,
 						t_tots *total, int c);
 void					ft_get_names(t_mything *mylist, struct stat statistics
-						,int c);
+						, int c);
 void					ft_get_fileperm(t_mything *mylist,
 						struct stat statistics, char *path);
 void					ft_printlong(t_mything *mylist);
@@ -97,7 +97,7 @@ void					ft_checknano(int c, t_mything *fh,
 						t_mything *bh, t_mything **result);
 void					ft_putdir(char *str);
 void					ft_checkflags(int *c, int *ptri
-						,int x, char **argv);
+						, int x, char **argv);
 int						ft_checkextra(char *filename, int c);
 void					ft_putextra(t_mything *mylist, int c);
 void					checkerrors(char *path);
@@ -110,6 +110,5 @@ void					checkascii(int c, t_mything *fh, t_mything *bh
 void					checkascii_t(int c, t_mything *fh, t_mything *bh
 						, t_mything **result);
 void					checkillegalflag(char **argv, int *i, int x);
-
 
 #endif
