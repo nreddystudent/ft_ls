@@ -82,7 +82,8 @@ void	ft_get_names(t_mything *mylist, struct stat statistics, int c)
 		mylist->user = ft_strdup(uid->pw_name);
 }
 
-void	ft_gettime(char *datem, struct stat statistics, int rawtime, int rawtimen)
+void	ft_gettime(char *datem, struct stat statistics, int rawtime
+		, int rawtimen)
 {
 	char		*date;
 	int			i;

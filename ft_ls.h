@@ -101,7 +101,7 @@ void					ft_checkflags(int *c, int *ptri
 						, int x, char **argv);
 int						ft_checkextra(char *filename, int c);
 void					ft_putextra(t_mything *mylist, int c);
-void					checkerrors(char *path);
+void					checkerrors(char *path, int flags);
 void					printtotal(t_tots total);
 void					checkrecursion(char *path, int c, t_mything **ptrarray);
 void					read_mf(char **argv, int c, int i);

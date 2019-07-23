@@ -13,10 +13,14 @@
 #include "../ft_ls.h"
 #include "../libft/libft.h"
 
-void	checkerrors(char *path)
+void	checkerrors(char *path, int flags)
 {
 	if (errno == 20)
-		ft_putendl(path);
+	{
+		checkfiles(&path, flags);
+		ft_putchar('\n');
+		return ;
+	}
 	else
 	{
 		ft_putstr("ls : ");
@@ -54,7 +58,7 @@ void	checkfiles(char **argv, int c)
 			ft_putstr("   ");
 			continue ;
 		}
-			i += 1;
+		i += 1;
 	}
 }
 
@@ -68,12 +72,11 @@ void	checkillegalflag(char **argv, int *ptri, int x)
 
 void	ft_print_long_file(char *file, int flags)
 {
-	t_mything *filedetail;
-
-	t_tots filenum;
+	t_mything	*filedetail;
+	t_tots		filenum;
 
 	filenum.flags = flags;
-	filedetail = ft_listnew(file, "./" , &filenum);
+	filedetail = ft_listnew(file, "./", &filenum);
 	ft_printlong(filedetail);
 	ft_putstr(" ");
 	ft_putendl(file);

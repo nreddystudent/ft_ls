@@ -25,16 +25,8 @@ void		ft_read(char *path, int c)
 	total.flags = c;
 	if (file == NULL)
 	{
-		if (errno == 20)
-		{
-			checkfiles(&path, c);
-			return ;
-		}
-		else
-		{
-			checkerrors(path);
-			return ;
-		}
+		checkerrors(path, c);
+		return ;
 	}
 	while ((ptr = readdir(file)))
 	{
