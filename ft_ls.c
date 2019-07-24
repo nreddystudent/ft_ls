@@ -80,9 +80,12 @@ int			main(int argc, char **argv)
 		i = 1;
 	c = 0;
 	i = ft_check_args(argv, &i, &c, argc);
-	if ((((((argv[1][0] == '-' && argv[1][1] == '-')
-	|| argv[1][0] == '\0') && c & 16) || (argv[i + 1] == '\0' && c & 16)))
-	&& !(argv[1][0] == '-' && argv[1][1] == '\0'))
+	if ((c & 16 && argv[1][1] != '\0') || (argc == 1))
+	{
+		ft_read(".", c);
+		return (0);
+	}
+	if (argv[1][1] == '-' && argv[1][2] == '\0')
 	{
 		ft_read(".", c);
 		return (0);

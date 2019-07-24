@@ -82,3 +82,12 @@ void	ft_print_long_file(char *file, int flags)
 	ft_putendl(file);
 	ft_listdel(filedetail);
 }
+
+int		ft_checksetflag(char flag)
+{
+	if (flag == 'G' || flag == 'a' || flag == 'l' || flag == 'r' || flag == 'R'
+	|| flag == 't' || flag == 'A' || flag == 'p' || flag == 'f'
+	|| flag == 'n')
+		return (1);
+	return (0);
+}

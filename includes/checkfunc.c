@@ -59,9 +59,9 @@ void		ft_checkspacing_r(int n)
 
 void		ft_checkflags(int *c, int *ptri, int x, char **argv)
 {
-	if (argv[*ptri][x] == 'a' && !(*c & FLAG_A))
+	if ((argv[*ptri][x] == 'a' || argv[*ptri][x] == 'f') && !(*c & FLAG_A))
 		*c += FLAG_A;
-	else if (argv[*ptri][x] == 'l' && !(*c & FLAG_L))
+	else if ((argv[*ptri][x] == 'l' || argv[*ptri][x] == 'n') && !(*c & FLAG_L))
 		*c += FLAG_L;
 	else if (argv[*ptri][x] == 'r' && !(*c & FLAG_REV))
 		*c += FLAG_REV;
@@ -76,10 +76,12 @@ void		ft_checkflags(int *c, int *ptri, int x, char **argv)
 	else if (argv[*ptri][x] == 'p' && !(*c & FLAG_P))
 		*c += FLAG_P;
 	else if (argv[*ptri][x] == 'f' && !(*c & FLAG_F))
-		*c += FLAG_F + FLAG_A;
+		*c += FLAG_F;
 	else if (argv[*ptri][x] == 'n' && !(*c & FLAG_N))
-		*c += FLAG_N + FLAG_L;
-	else if (((argv[*ptri][x]) == '-' && argv[*ptri][x + 1] == '-'
-	&& argv[*ptri][x + 2] != '\0') || (argv[*ptri][x] != '-'))
+		*c += FLAG_N;
+	else if (ft_checksetflag(argv[*ptri][x]) == 1)
+		return ;
+	else if ((x > 1 && argv[*ptri][x] == '-')
+	|| (ft_checksetflag(argv[*ptri][x]) == 0 && x > 0 && argv[*ptri][1] != '-'))
 		checkillegalflag(argv, ptri, x);
 }

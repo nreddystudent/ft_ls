@@ -112,4 +112,5 @@ void					checkascii_t(int c, t_mything *fh, t_mything *bh
 						, t_mything **result);
 void					checkillegalflag(char **argv, int *i, int x);
 void					ft_print_long_file(char *file, int flags);
+int						ft_checksetflag(char flag);
 #endif
