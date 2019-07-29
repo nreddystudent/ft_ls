@@ -71,7 +71,7 @@ void		ft_checkflags(int *c, int *ptri, int x, char **argv)
 		*c += FLAG_T;
 	else if (argv[*ptri][x] == 'A' && !(*c & FLAG_AL))
 		*c += FLAG_AL;
-	else if (argv[*ptri][x] == 'G' && !(*c & FLAG_AL))
+	else if (argv[*ptri][x] == 'G' && !(*c & FLAG_G))
 		*c += FLAG_G;
 	else if (argv[*ptri][x] == 'p' && !(*c & FLAG_P))
 		*c += FLAG_P;
