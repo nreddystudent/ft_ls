@@ -40,11 +40,12 @@ void	checkrecursion(char *path, int c, t_mything **ptrarray)
 void	checkfiles(char **argv, int c)
 {
 	int i;
+	DIR *file;
 
 	i = 0;
 	while (argv[i] != NULL)
 	{
-		opendir(argv[i]);
+		file = opendir(argv[i]);
 		if (errno == 20)
 		{
 			errno = 0;
@@ -58,8 +59,10 @@ void	checkfiles(char **argv, int c)
 			ft_putstr("   ");
 			continue ;
 		}
-		i += 1;
+		i += 1;	
+		closedir(file);
 	}
+
 }
 
 void	checkillegalflag(char **argv, int *ptri, int x)

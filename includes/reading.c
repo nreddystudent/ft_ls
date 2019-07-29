@@ -25,6 +25,7 @@ void		ft_read(char *path, int c)
 	total.flags = c;
 	if (file == NULL)
 	{
+		ft_putendl(path);
 		checkerrors(path, c);
 		return ;
 	}
@@ -73,22 +74,28 @@ void		ft_readr(char *path, int c,
 
 void		read_mf(char **argv, int c, int i)
 {
+	DIR *file;
+
 	i = 0;
 	checkfiles(argv, c);
 	ft_putendl("\n");
 	while (argv[i] != NULL)
 	{
-		if (opendir(argv[i]))
+		if ((file = opendir(argv[i])))
 		{
+			closedir(file);
 			ft_putstr(argv[i]);
 			ft_putendl(" :");
 		}
-		if (errno == 20)
+		else if (errno == 20)
 		{
+			closedir(file);
 			errno = 0;
 			i++;
 			continue ;
 		}
+		else
+			closedir(file);
 		ft_read(argv[i++], c);
 		ft_putchar('\n');
 	}
@@ -108,6 +115,7 @@ int			passread(int *flagi, char **argv, int argc, char **multif)
 	}
 	if (argc - 1 - flagi[1] > 0)
 	{
+		ft_multifile(multif, argc, flagi[1], argv);
 		flagi[0] += FLAG_MF;
 		ft_ls(argc, multif, flagi[0], flagi[1]);
 		return (0);
