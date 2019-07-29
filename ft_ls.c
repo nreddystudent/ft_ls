@@ -85,7 +85,7 @@ int			main(int argc, char **argv)
 		ft_read(".", c);
 		return (0);
 	}
-	if (argv[1][1] == '-' && argv[1][2] == '\0')
+	if (argv[1][2] == '-' && argv[1][3] == '\0' && argv[2] == NULL)
 	{
 		ft_read(".", c);
 		return (0);
