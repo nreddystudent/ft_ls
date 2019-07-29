@@ -16,13 +16,13 @@
 void	ft_printlong(t_mything *mylist)
 {
 	ft_putstr(mylist->permission);
-	ft_putstr("        ");
+	ft_putstr(" ");
 	ft_putnbr(mylist->nlink);
 	ft_checkspacing(mylist->nlink);
 	ft_putstr(mylist->user);
-	ft_putstr("        ");
+	ft_checkspacing_s(mylist->user);
 	ft_putstr(mylist->group);
-	ft_putstr("        ");
+	ft_checkspacing_s(mylist->group);
 	ft_putnbr(mylist->filesize);
 	ft_checkspacing(mylist->filesize);
 	ft_printdate(mylist);
@@ -44,12 +44,12 @@ void	ft_printlist(t_mything *mylist, int c,
 			ft_putstr(mylist->d_name);
 		if (mylist->permission[0] == 'l' && c & FLAG_L)
 			ft_printlink(path, mylist);
-		if (c & FLAG_L)
+		if (c & FLAG_L && mylist->next != NULL)
 			ft_putchar('\n');
 		else if (c & FLAG_R)
 			ft_checkspacing_r(ft_strlen(mylist->d_name));
-		else
-			ft_putstr("   ");
+		else if (mylist->next != NULL)
+			ft_putchar('\n');
 		mylist = mylist->next;
 	}
 	ft_putchar('\n');

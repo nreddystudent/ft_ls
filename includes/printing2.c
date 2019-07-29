@@ -19,3 +19,15 @@ void	printtotal(t_tots total)
 	ft_putnbr(total.total);
 	ft_putchar('\n');
 }
+
+void	ft_checkspacing_s(char *str)
+{
+	int	i = 0;
+	i = ft_strlen(str);
+	if (i < 14)
+		i = 14 - i;
+	else
+		i = i - 14;
+	while (i-- > 0)
+		ft_putchar(' ');
+}
