@@ -93,3 +93,24 @@ void		read_mf(char **argv, int c, int i)
 		ft_putchar('\n');
 	}
 }
+
+int			passread(int *flagi, char **argv, int argc, char **multif)
+{
+	if ((flagi[0] & 16 && argv[1][1] != '\0') || (argc == 1))
+	{
+		ft_read(".", flagi[0]);
+		return (0);
+	}
+	if (argv[1][2] == '-' && argv[1][3] == '\0' && argv[2] == NULL)
+	{
+		ft_read(".", flagi[0]);
+		return (0);
+	}
+	if (argc - 1 - flagi[1] > 0)
+	{
+		flagi[0] += FLAG_MF;
+		ft_ls(argc, multif, flagi[0], flagi[1]);
+		return (0);
+	}
+	return (1);
+}

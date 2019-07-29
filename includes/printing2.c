@@ -22,7 +22,8 @@ void	printtotal(t_tots total)
 
 void	ft_checkspacing_s(char *str)
 {
-	int	i = 0;
+	int	i;
+
 	i = ft_strlen(str);
 	if (i < 14)
 		i = 14 - i;
@@ -30,4 +31,17 @@ void	ft_checkspacing_s(char *str)
 		i = i - 14;
 	while (i-- > 0)
 		ft_putchar(' ');
+}
+
+void	ft_print_long_file(char *file, int flags)
+{
+	t_mything	*filedetail;
+	t_tots		filenum;
+
+	filenum.flags = flags;
+	filedetail = ft_listnew(file, "./", &filenum);
+	ft_printlong(filedetail);
+	ft_putstr(" ");
+	ft_putendl(file);
+	ft_listdel(filedetail);
 }

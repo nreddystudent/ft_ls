@@ -114,4 +114,6 @@ void					checkillegalflag(char **argv, int *i, int x);
 void					ft_print_long_file(char *file, int flags);
 int						ft_checksetflag(char flag);
 void					ft_checkspacing_s(char *str);
+int						passread(int *flagi, char **argv, int argc,
+						char **multif);
 #endif

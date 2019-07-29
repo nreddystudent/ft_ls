@@ -74,29 +74,17 @@ int			main(int argc, char **argv)
 	int				i;
 	int				c;
 	char			*multif[argc];
+	int				flagi[2];
 
 	i = 0;
 	if (argv[1] != NULL)
 		i = 1;
 	c = 0;
 	i = ft_check_args(argv, &i, &c, argc);
-	if ((c & 16 && argv[1][1] != '\0') || (argc == 1))
-	{
-		ft_read(".", c);
+	flagi[0] = c;
+	flagi[1] = i;
+	if (passread(flagi, argv, argc, multif) == 0)
 		return (0);
-	}
-	if (argv[1][2] == '-' && argv[1][3] == '\0' && argv[2] == NULL)
-	{
-		ft_read(".", c);
-		return (0);
-	}
-	if (argc - 1 - i > 0)
-	{
-		ft_multifile(multif, argc, i, argv);
-		c += FLAG_MF;
-		ft_ls(argc, multif, c, i);
-		return (0);
-	}
 	ft_ls(argc, argv, c, i);
 	return (0);
 }

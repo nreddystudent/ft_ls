@@ -70,19 +70,6 @@ void	checkillegalflag(char **argv, int *ptri, int x)
 	exit(0);
 }
 
-void	ft_print_long_file(char *file, int flags)
-{
-	t_mything	*filedetail;
-	t_tots		filenum;
-
-	filenum.flags = flags;
-	filedetail = ft_listnew(file, "./", &filenum);
-	ft_printlong(filedetail);
-	ft_putstr(" ");
-	ft_putendl(file);
-	ft_listdel(filedetail);
-}
-
 int		ft_checksetflag(char flag)
 {
 	if (flag == 'G' || flag == 'a' || flag == 'l' || flag == 'r' || flag == 'R'

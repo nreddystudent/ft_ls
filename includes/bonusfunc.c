@@ -28,30 +28,36 @@ int		ft_checkextra(char *filename, int c)
 
 int		bgcolour(t_mything *mylist)
 {
-	if (ft_strchr(mylist->permission, 's') || ft_strchr(mylist->permission, 't'))
+	if (ft_strchr(mylist->permission, 's')
+	|| ft_strchr(mylist->permission, 't'))
 	{
 		ft_putstr("\e[30m");
-	if (mylist->permission[3] == 's' || mylist->permission[3] == 't')
-		ft_putstr("\033[0;41m");
-	else if (mylist->permission[6] == 's' || mylist->permission[6] == 't')
-		ft_putstr("\033[0;46m");
-	else if (mylist->permission[9] == 's' || mylist->permission[9] == 't')
-		ft_putstr("\033[0;45m");
+		if (mylist->permission[3] == 's' || mylist->permission[3] == 't')
+			ft_putstr("\033[0;41m");
+		else if (mylist->permission[6] == 's' || mylist->permission[6] == 't')
+			ft_putstr("\033[0;46m");
+		else if (mylist->permission[9] == 's' || mylist->permission[9] == 't')
+			ft_putstr("\033[0;45m");
 		return (1);
 	}
-		return (0);
+	return (0);
 }
+
 void	ft_putextra(t_mything *mylist, int c)
 {
 	int res;
-	if ((res = bgcolour(mylist)) == 0)
+
+	res = 0;
+	if (c & FLAG_G)
+		res = bgcolour(mylist);
+	if ((res == 0 && c & FLAG_G))
 	{
-	if (mylist->permission[0] == 'd' && c & FLAG_G)
-		ft_putstr("\033[0;34m");
-	else if (mylist->permission[0] == 'l' && c & FLAG_G)
-		ft_putstr("\033[0;35m");
-	else if (mylist->permission[3] == 'x' && c & FLAG_G)
-		ft_putstr("\033[0;31m");
+		if (mylist->permission[0] == 'd')
+			ft_putstr("\033[0;34m");
+		else if (mylist->permission[0] == 'l')
+			ft_putstr("\033[0;35m");
+		else if (mylist->permission[3] == 'x')
+			ft_putstr("\033[0;31m");
 	}
 	if (res == 1)
 		ft_putstr("\e[30m");
