@@ -47,10 +47,10 @@ void	checkfiles(char **argv, int c)
 	file = NULL;
 	while (argv[i] != NULL)
 	{
-		file = opendir(argv[i]);
+		if ((file = opendir(argv[i])))
+			closedir(file);
 		if (errno == 20)
 		{
-			closedir(file);
 			errno = 0;
 			if (c & FLAG_L)
 			{
@@ -63,7 +63,6 @@ void	checkfiles(char **argv, int c)
 			continue ;
 		}
 		i += 1;
-		closedir(file);
 	}
 }
 

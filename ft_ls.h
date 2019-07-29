@@ -119,5 +119,5 @@ int						passread(int *flagi, char **argv, int argc,
 						char **multif);
 void					ft_extendedacl(char *path, char *permission);
 void					ft_multifile(char **multif, int argc, int i
-						,char **argv);
+						, char **argv);
 #endif

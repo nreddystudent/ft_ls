@@ -71,7 +71,7 @@ void		ft_readr(char *path, int c,
 	}
 }
 
-void		 read_mf(char **argv, int c, int i)
+void		read_mf(char **argv, int c, int i)
 {
 	DIR *file;
 
@@ -88,13 +88,10 @@ void		 read_mf(char **argv, int c, int i)
 		}
 		else if (errno == 20)
 		{
-			closedir(file);
 			errno = 0;
 			i++;
 			continue ;
 		}
-		else
-			closedir(file);
 		ft_read(argv[i++], c);
 		ft_putchar('\n');
 	}
