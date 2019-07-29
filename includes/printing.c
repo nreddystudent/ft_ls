@@ -53,7 +53,7 @@ void	ft_printlist(t_mything *mylist, int c,
 		mylist = mylist->next;
 	}
 	ft_putchar('\n');
-	if (c & FLAG_R && !(c & FLAG_L))
+	if (c & FLAG_R || (c & FLAG_L && c & FLAG_R))
 		ft_putchar('\n');
 }
 

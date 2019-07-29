@@ -66,3 +66,22 @@ void	ft_putextra(t_mything *mylist, int c)
 	if (mylist->permission[0] == 'd' && c & FLAG_P)
 		ft_putchar('/');
 }
+
+void	ft_extendedacl(char *path, char *permission)
+{
+	acl_t acl;
+
+	if (listxattr(path, 0, 0, XATTR_NOFOLLOW))
+	{
+		permission[10] = '@';
+		return ;
+	}
+	else if ((acl = acl_get_file(path, ACL_TYPE_EXTENDED)))
+	{
+		permission[10] = '+';
+		acl_free(acl);
+		return ;
+	}
+	acl_free(acl);
+	permission[10] = ' ';
+}

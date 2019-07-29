@@ -35,6 +35,7 @@ void	ft_add_elements(t_mything *mylist, char *path, t_tots *total, int c)
 
 void	ft_get_fileperm(char *permission, struct stat statistics, char *path)
 {
+	permission[11] = '\0';
 	permission[0] = (ft_is_dir(path)) ? 'd' : '-';
 	if (ft_islink(path))
 		permission[0] = 'l';
@@ -53,7 +54,7 @@ void	ft_get_fileperm(char *permission, struct stat statistics, char *path)
 	permission[9] = statistics.st_mode & S_IXOTH ? 'x' : '-';
 	if (statistics.st_mode & S_ISVTX)
 		permission[9] = permission[9] == 'x' ? 't' : 'T';
-	permission[10] = '\0';
+	ft_extendedacl(path, permission);
 }
 
 void	ft_getlisi(t_mything *mylist, struct stat statisics, t_tots *total)

@@ -49,12 +49,8 @@ int			ft_islink(const char *pname)
 
 void		ft_checkspacing_r(int n)
 {
-	if (n < 16)
-		n = 16 - n;
-	else
-		n = n - 16;
-	while (n-- > 0)
-		ft_putchar(' ');
+	(void)n;
+	ft_putchar('\n');
 }
 
 void		ft_checkflags(int *c, int *ptri, int x, char **argv)

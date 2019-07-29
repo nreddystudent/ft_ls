@@ -23,6 +23,7 @@
 # include <sys/xattr.h>
 # include <string.h>
 # include <errno.h>
+# include <sys/acl.h>
 # define MAXPATHLEN 1024
 # define FLAG_A		1
 # define FLAG_L		2
@@ -116,4 +117,5 @@ int						ft_checksetflag(char flag);
 void					ft_checkspacing_s(char *str);
 int						passread(int *flagi, char **argv, int argc,
 						char **multif);
+void					ft_extendedacl(char *path, char *permission);
 #endif
