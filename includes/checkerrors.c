@@ -17,6 +17,7 @@ void	checkerrors(char *path, int flags)
 {
 	if (errno == 20)
 	{
+		errno = 0;
 		checkfiles(&path, flags);
 		ft_putchar('\n');
 		return ;
@@ -39,15 +40,17 @@ void	checkrecursion(char *path, int c, t_mything **ptrarray)
 
 void	checkfiles(char **argv, int c)
 {
-	int i;
-	DIR *file;
+	int		i;
+	DIR		*file;
 
 	i = 0;
+	file = NULL;
 	while (argv[i] != NULL)
 	{
 		file = opendir(argv[i]);
 		if (errno == 20)
 		{
+			closedir(file);
 			errno = 0;
 			if (c & FLAG_L)
 			{
@@ -59,10 +62,9 @@ void	checkfiles(char **argv, int c)
 			ft_putstr("   ");
 			continue ;
 		}
-		i += 1;	
+		i += 1;
 		closedir(file);
 	}
-
 }
 
 void	checkillegalflag(char **argv, int *ptri, int x)

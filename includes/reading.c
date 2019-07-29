@@ -25,7 +25,6 @@ void		ft_read(char *path, int c)
 	total.flags = c;
 	if (file == NULL)
 	{
-		ft_putendl(path);
 		checkerrors(path, c);
 		return ;
 	}
@@ -72,7 +71,7 @@ void		ft_readr(char *path, int c,
 	}
 }
 
-void		read_mf(char **argv, int c, int i)
+void		 read_mf(char **argv, int c, int i)
 {
 	DIR *file;
 
