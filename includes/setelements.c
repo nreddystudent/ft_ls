@@ -28,7 +28,8 @@ void	ft_add_elements(t_mything *mylist, char *path, t_tots *total, int c)
 	ft_get_fileperm(mylist->permission, statistics, rpath);
 	ft_getlisi(mylist, statistics, total);
 	ft_get_names(mylist, statistics, c);
-	ft_gettime(mylist->date, statistics, &(mylist->rawtime), &(mylist->rawtimen));
+	ft_gettime(mylist->date, statistics,
+	&(mylist->rawtime), &(mylist->rawtimen));
 	free(temp);
 	free(rpath);
 }
