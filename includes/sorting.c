@@ -95,14 +95,14 @@ t_mything	*ft_sortedmerge_t(t_mything *fh, t_mything *bh, int c)
 }
 
 void		ft_checknano(int c, t_mything *fh, t_mything *bh,
-					t_mything **result)
+			t_mything **result)
 {
-	if (!(FLAG_REV & c) && (fh->rawtimen > bh->rawtimen))
+	if (!(c & FLAG_REV) && (fh->rawtimen > bh->rawtimen))
 	{
 		*result = fh;
 		(*result)->next = ft_sortedmerge_t(fh->next, bh, c);
 	}
-	else if ((FLAG_REV & c) && (fh->rawtimen < bh->rawtimen))
+	else if ((c & FLAG_REV) && (fh->rawtimen < bh->rawtimen))
 	{
 		*result = fh;
 		(*result)->next = ft_sortedmerge_t(fh->next, bh, c);

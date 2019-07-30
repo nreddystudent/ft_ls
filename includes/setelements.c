@@ -28,7 +28,7 @@ void	ft_add_elements(t_mything *mylist, char *path, t_tots *total, int c)
 	ft_get_fileperm(mylist->permission, statistics, rpath);
 	ft_getlisi(mylist, statistics, total);
 	ft_get_names(mylist, statistics, c);
-	ft_gettime(mylist->date, statistics, mylist->rawtime, mylist->rawtimen);
+	ft_gettime(mylist->date, statistics, &(mylist->rawtime), &(mylist->rawtimen));
 	free(temp);
 	free(rpath);
 }
@@ -81,8 +81,8 @@ void	ft_get_names(t_mything *mylist, struct stat statistics, int c)
 		mylist->user = ft_strdup(uid->pw_name);
 }
 
-void	ft_gettime(char *datem, struct stat statistics, int rawtime
-		, int rawtimen)
+void	ft_gettime(char *datem, struct stat statistics, time_t *rawtime
+		, time_t *rawtimen)
 {
 	char		*date;
 	int			i;
@@ -94,7 +94,7 @@ void	ft_gettime(char *datem, struct stat statistics, int rawtime
 	while (i < 16)
 		datem[x++] = date[i++];
 	datem[12] = '\0';
-	rawtime = statistics.st_mtime;
-	rawtimen = statistics.st_mtimespec.tv_nsec;
+	*rawtime = statistics.st_mtime;
+	*rawtimen = statistics.st_mtimespec.tv_nsec;
 	free(date);
 }

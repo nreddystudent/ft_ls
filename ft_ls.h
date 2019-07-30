@@ -86,7 +86,7 @@ void					ft_getlisi(t_mything *mylist, struct stat statisics,
 						t_tots *total);
 int						ft_islink(const char *pname);
 void					ft_gettime(char *datem, struct stat statistics
-						, int rawtime, int rawtimen);
+						, time_t *rawtime, time_t *rawtimen);
 t_mything				**ft_setarray(t_mything **ptrarray, t_tots *total);
 t_mything				**ft_setarray(t_mything **ptrarray, t_tots *total);
 void					ft_printlink(char *path, t_mything *mylist);
