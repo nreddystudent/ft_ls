@@ -36,9 +36,7 @@ void	ft_add_elements(t_mything *mylist, char *path, t_tots *total, int c)
 void	ft_get_fileperm(char *permission, struct stat statistics, char *path)
 {
 	permission[11] = '\0';
-	permission[0] = (ft_is_dir(path)) ? 'd' : '-';
-	if (ft_islink(path))
-		permission[0] = 'l';
+	setfirstpermission(permission, path);
 	permission[1] = statistics.st_mode & S_IRUSR ? 'r' : '-';
 	permission[2] = statistics.st_mode & S_IWUSR ? 'w' : '-';
 	permission[3] = statistics.st_mode & S_IXUSR ? 'x' : '-';

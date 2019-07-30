@@ -120,4 +120,6 @@ int						passread(int *flagi, char **argv, int argc,
 void					ft_extendedacl(char *path, char *permission);
 void					ft_multifile(char **multif, int argc, int i
 						, char **argv);
+void					setfirstpermission(char *permission, char *path);
+
 #endif
