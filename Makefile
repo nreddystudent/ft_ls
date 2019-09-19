@@ -24,6 +24,7 @@ clean:
 fclean:clean
 	@rm -f ft_ls
 	@rm -f libftcomb.a
+	@rm -f *.o
 	@echo "$(LBLUE)Cleaned librarys and exec"
 
 re:fclean all
