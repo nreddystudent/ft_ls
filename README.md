@@ -29,7 +29,7 @@ Recreating Terminal command ls in C
 `` make``
   </br>
   </br>
-``./ft_ls [-t][-l][-R][-a][-r]``
+``./ft_ls [-AGRalfnprt]``
 ---
 
 ## **References**
