@@ -10,9 +10,6 @@ $(NAME):
 	@ar rc $(NAME) $(NAMEO)
 	@ranlib $(NAME)
 
-some:
-	@gcc -Wall -Werror -Wextra -c $(NAMEC)
-
 clean:
 	@rm -f $(NAMEO)
 
